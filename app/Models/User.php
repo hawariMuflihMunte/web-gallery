@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +16,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'Username',
+        'Password',
+        'Email',
+        'NamaLengkap',
+        'Alamat',
     ];
 
     /**
@@ -29,7 +29,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'Password',
         'remember_token',
     ];
 
@@ -39,7 +39,26 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function album(): HasMany
+    {
+        return $this->hasMany(Album::class, 'AlbumID');
+    }
+
+    public function foto(): HasMany
+    {
+        return $this->hasMany(Foto::class, 'FotoID');
+    }
+
+    public function komentarfoto(): HasMany
+    {
+        return $this->hasMany(KomentarFoto::class, 'KomentarID');
+    }
+
+    public function likefoto(): HasMany
+    {
+        return $this->hasMany(LikeFoto::class, 'LikeID');
+    }
 }
