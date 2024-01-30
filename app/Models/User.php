@@ -10,6 +10,10 @@ class User extends Authenticatable
 {
     use HasFactory;
 
+    protected $table = 'user';
+    protected $primaryKey = 'UserID';
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -30,7 +34,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'Password',
-        'remember_token',
     ];
 
     /**
