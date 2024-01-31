@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -43,4 +44,24 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public function album(): HasMany
+    {
+        return $this->hasMany(Album::class, 'AlbumID');
+    }
+
+    public function foto(): HasMany
+    {
+        return $this->hasMany(Foto::class, 'FotoID');
+    }
+
+    public function komentarfoto(): HasMany
+    {
+        return $this->hasMany(KomentarFoto::class, 'KomentarID');
+    }
+
+    public function likefoto(): HasMany
+    {
+        return $this->hasMany(LikeFoto::class, 'LikeID');
+    }
 }
