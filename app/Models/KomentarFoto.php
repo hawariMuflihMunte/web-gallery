@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class KomentarFoto extends Model
 {
@@ -19,4 +20,14 @@ class KomentarFoto extends Model
         'IsiKomentar',
         'TanggalKomentar',
     ];
+
+    public function foto(): BelongsTo
+    {
+        return $this->belongsTo(Foto::class, 'FotoID');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'UserID');
+    }
 }
