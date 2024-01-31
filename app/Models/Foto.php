@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Foto extends Model
 {
@@ -20,4 +22,24 @@ class Foto extends Model
         'DeskripsiFoto',
         'TanggalDiunggah',
     ];
+
+    public function album(): BelongsTo
+    {
+        return $this->belongsTo(Album::class, 'AlbumID');
+    }
+
+    public function komentarfoto(): HasMany
+    {
+        return $this->hasMany(KomentarFoto::class, 'KomentarID');
+    }
+
+    public function likefoto(): HasMany
+    {
+        return $this->hasMany(LikeFoto::class, 'LikeID');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'UserID');
+    }
 }
