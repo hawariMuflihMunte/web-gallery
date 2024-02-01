@@ -54,5 +54,6 @@ main {
                 <a href="/register" class="p-1 glass_morphism_yellow_bg">Daftar</a>
             </section>
         </section>
+        <x-alert type="success" title="Pendaftaran berhasil!" message="ABC"></x-alert>
     </main>
 @endsection
