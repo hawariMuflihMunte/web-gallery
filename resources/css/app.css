@@ -4,8 +4,8 @@
 
 @layer components {
   .glass_morphism {
-    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.1px] border rounded-2xl border-solid border-[rgba(255,255,255,0.39)];
-    background: rgba(255, 255, 255, 0.43);
-    -webkit-backdrop-filter: blur(7.1px);
+    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[6.3px] border rounded-2xl border-solid border-[rgba(255,255,255,0.88)];
+    background: rgba(255, 255, 255, 0.65);
+    -webkit-backdrop-filter: blur(6.3px);
   }
 }
