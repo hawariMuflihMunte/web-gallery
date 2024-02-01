@@ -24,6 +24,10 @@ main {
                         type="text"
                         name="username"
                         id="username"
+                        value="{{ old('username') }}"
+                        required
+                        minlength="1"
+                        autofocus
                         class="glass_morphism_blue_bg rounded-md px-2 py-1 outline-none text-slate-700 font-serif"
                     />
                 </section>
@@ -33,8 +37,14 @@ main {
                         type="text"
                         name="namalengkap"
                         id="namalengkap"
+                        value="{{ old('namalengkap') }}"
+                        required
+                        minlength="1"
                         class="glass_morphism_yellow_bg rounded-md px-2 py-1 outline-none text-slate-700 font-serif"
                     />
+                    @error('namalengkap')
+                        <p class="text-red-700"><small>Karakter yang diperbolelkan hanyalah huruf dan titik !</small></p>
+                    @enderror
                 </section>
                 <section class="flex flex-col">
                     <label for="email">Email</label>
@@ -42,8 +52,14 @@ main {
                         type="email"
                         name="email"
                         id="email"
+                        value="{{ old('email') }}"
+                        required
+                        minlength="1"
                         class="glass_morphism_red_bg rounded-md px-2 py-1 outline-none text-slate-900 font-serif"
                     />
+                    @error('email')
+                        <p class="text-red-700"><small>Format email salah, silahkan coba kembali !</small></p>
+                    @enderror
                 </section>
                 <section class="flex flex-col">
                     <label for="password">Password</label>
@@ -51,17 +67,27 @@ main {
                         type="password"
                         name="password"
                         id="password"
+                        required
+                        minlength="1"
                         class="glass_morphism_purple_bg rounded-md px-2 py-1 outline-none text-slate-900 font-serif"
                     />
+                    @error('password')
+                        <p class="text-red-700"><small>Password berisi minimal 8 karakter !</small></p>
+                    @enderror
                 </section>
                 <section class="flex flex-col">
                     <label for="password-confirmation">Konfirmasi Password</label>
                     <input
-                        type="text"
+                        type="password"
                         name="password-confirmation"
                         id="password-confirmation"
+                        required
+                        minlength="1"
                         class="glass_morphism_pink_bg rounded-md px-2 py-1 outline-none text-slate-900 font-serif"
                     />
+                    @error('password-confirmation')
+                        <p class="text-red-700"><small>Password tidak cocok, silahkan coba kembali!</small></p>
+                    @enderror
                 </section>
                 <section class="mt-2">
                     <button

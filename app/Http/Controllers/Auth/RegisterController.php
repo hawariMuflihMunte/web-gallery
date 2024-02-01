@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -30,21 +31,24 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->validate([
-            'username' => ['required', 'string'],
-            'namalengkap' => ['required', 'string'],
+            'username' => ['required', 'string', 'min:1'],
+            'namalengkap' => ['required', 'string', 'min:1', 'regex:/^[a-zA-Z]+(?:[\s,\.]{1,2}[a-zA-Z]+)*$/'],
             'email' => ['required', 'email', 'unique:user'],
             'password' => ['required', 'min:8'],
+            'password-confirmation' => ['required', 'same:password'],
         ]);
 
         $user = User::create([
             'Username' => $credentials['username'],
             'NamaLengkap' => $credentials['namalengkap'],
             'Email' => $credentials['email'],
-            'Password' => $credentials['password'],
+            'Password' => Hash::make($credentials['password']),
             'Alamat' => '-',
         ]);
 
-        return back();
+        $request->session()->flash('success', 'Pendaftaran berhasil!');
+
+        return redirect('/login');
     }
 
     /**
