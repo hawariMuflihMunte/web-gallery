@@ -101,7 +101,7 @@ main {
             <hr class="border-current my-2">
             <section class="flex justify-between items-center">
                 <p>Sudah punya akun ?</p>
-                <a href="/login" class="p-1 glass_morphism_yellow_bg">Masuk</a>
+                <a href="/login" class="p-1 glass_morphism_yellow_bg rounded-md">Masuk</a>
             </section>
         </section>
     </main>

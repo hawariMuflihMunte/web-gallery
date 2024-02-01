@@ -13,8 +13,8 @@ main {
 
 @section('content')
     <main class="min-w-full min-h-full h-[100vh] flex items-center justify-center">
-        @session('success')
-            <span>{{ session('success') }}</span>
+        @session('success-register')
+            <x-alert type="success" title="Pendaftaran berhasil!" :message="session('success-register')"></x-alert>
         @endsession
         <section class="glass_morphism p-10 max-w-96 flex flex-col gap-4 text-gray-700 w-full">
             <h1 class="text-2xl">Masuk</h1>
@@ -51,9 +51,8 @@ main {
             <hr class="border-current my-2">
             <section class="flex justify-between items-center">
                 <p>Tidak punya akun ?</p>
-                <a href="/register" class="p-1 glass_morphism_yellow_bg">Daftar</a>
+                <a href="/register" class="p-1 glass_morphism_yellow_bg rounded-md">Daftar</a>
             </section>
         </section>
-        <x-alert type="success" title="Pendaftaran berhasil!" message="ABC"></x-alert>
     </main>
 @endsection

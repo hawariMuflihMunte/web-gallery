@@ -46,7 +46,7 @@ class RegisterController extends Controller
             'Alamat' => '-',
         ]);
 
-        $request->session()->flash('success', 'Pendaftaran berhasil!');
+        $request->session()->flash('success-register', 'Silahkan masuk !');
 
         return redirect('/login');
     }
