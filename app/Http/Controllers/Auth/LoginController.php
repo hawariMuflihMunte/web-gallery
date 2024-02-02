@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -28,7 +30,19 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'username' => ['required', 'string', 'min:1'],
+            'password' => ['required', 'min:8'],
+        ]);
+
+        $auth = User::where('Username', $credentials['username'])->first();
+        $authPassword = password_verify($credentials['password'], $auth['Password']);
+
+        $checkUsername = User::find($credentials['username']);
+        $checkPassword = User::find($credentials['password']);
+        $checkExisted = User::where('Username', 'hawariMuflih')->get();
+
+        dd($auth, $authPassword, $checkUsername, $checkPassword, $checkExisted);
     }
 
     /**
