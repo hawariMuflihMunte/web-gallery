@@ -27,6 +27,7 @@ main {
                         type="text"
                         name="username"
                         id="username"
+                        autofocus
                         class="glass_morphism_blue_bg rounded-md px-2 py-1 outline-none text-slate-700 font-serif"
                     />
                 </section>
