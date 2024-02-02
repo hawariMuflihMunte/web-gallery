@@ -61,7 +61,11 @@ main {
                         <p class="text-red-700"><small>Format email salah, silahkan coba kembali !</small></p>
                     @enderror
                 </section>
-                <section class="flex flex-col">
+                <section class="flex flex-col" x-data="{
+                    passwordCount: '',
+                    showPasswordCounter: false,
+                    passwordMinLength: 8,
+                }">
                     <label for="password">Password</label>
                     <input
                         type="password"
@@ -70,7 +74,15 @@ main {
                         required
                         minlength="1"
                         class="glass_morphism_purple_bg rounded-md px-2 py-1 outline-none text-slate-900 font-serif"
+                        x-model="passwordCount"
+                        x-on:focus="showPasswordCounter = true"
+                        x-on:blur="showPasswordCounter = false"
                     />
+                    <p
+                        class="text-red-700"
+                        x-text="passwordMinLength - passwordCount.length"
+                        x-show="showPasswordCounter && passwordMinLength - passwordCount.length > 0"
+                    ></p>
                     @error('password')
                         <p class="text-red-700"><small>Password berisi minimal 8 karakter !</small></p>
                     @enderror
