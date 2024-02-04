@@ -2,7 +2,7 @@
 
 @section('title', 'Web Gallery Register')
 
-@section('styles')
+@section('additional-head-props')
 <style>
 main {
     background-image: url('./images/bg_register.png');
