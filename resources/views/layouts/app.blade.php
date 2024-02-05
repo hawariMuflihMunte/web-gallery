@@ -9,7 +9,7 @@
 
     @vite('resources/css/app.css')
 
-    @yield('styles')
+    @yield('additional-head-props')
     @show
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
