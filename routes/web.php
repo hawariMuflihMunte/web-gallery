@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/register', [RegisterController::class, 'index']);
@@ -28,5 +28,5 @@ Route::post('/login', [LoginController::class, 'authenticate'])->middleware('aut
 Route::group([
     'middleware' => 'auth',
 ], function () {
-    
+
 });
