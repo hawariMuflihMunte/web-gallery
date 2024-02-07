@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UploadManager;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +29,7 @@ Route::group([
         return view('home');
     });
 });
+
+// Exercise
+Route::get('/upload', [UploadManager::class, 'upload'])->name('upload');
+Route::post('/upload', [UploadManager::class, 'uploadPost'])->name('upload.post');
