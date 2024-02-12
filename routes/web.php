@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UploadManager;
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,3 +34,7 @@ Route::group([
 // Exercise
 Route::get('/upload', [UploadManager::class, 'upload'])->name('upload');
 Route::post('/upload', [UploadManager::class, 'uploadPost'])->name('upload.post');
+
+// Exercise #2
+Route::get('/upload-image', [ImageUploadController::class, 'index']);
+Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image.post');
