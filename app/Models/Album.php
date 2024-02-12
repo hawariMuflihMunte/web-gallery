@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Album extends Model
 {
     protected $table = 'album';
-    protected $primaryKey = ' AlbumID';
+    protected $primaryKey = 'AlbumID';
     public $timestamps = false;
 
     /**

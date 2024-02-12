@@ -38,3 +38,4 @@ Route::post('/upload', [UploadManager::class, 'uploadPost'])->name('upload.post'
 // Exercise #2
 Route::get('/upload-image', [ImageUploadController::class, 'index']);
 Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image.post');
+Route::get('/upload-image/view/{id}', [ImageUploadController::class, 'viewImage'])->name('upload.image.view.get');

@@ -20,7 +20,10 @@ class Foto extends Model
     protected $fillable = [
         'JudulFoto',
         'DeskripsiFoto',
-        'TanggalDiunggah',
+        'TanggalUnggah',
+        'LokasiFile',
+        'AlbumID',
+        'UserID',
     ];
 
     public function album(): BelongsTo

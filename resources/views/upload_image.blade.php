@@ -15,20 +15,42 @@
     <section class="fixed top-3 left-3 bg-slate-300 text-slate-900 p-3">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <li>💔 {{ $error }}</li>
             @endforeach
         </ul>
     </section>
+    @endif
+    @if(session()->has('success'))
+        <section class="fixed top-3 left-3 bg-slate-300 text-slate-900 p-3">
+            {{ session()->get('success') }}
+        </section>
     @endif
     <form
         action="{{ route('upload.image.post') }}"
         method="post"
         enctype="multipart/form-data"
-        class="bg-zinc-800 text-zinc-100 flex justify-center max-w-60 p-5"
+        class="bg-zinc-800 text-zinc-100 flex flex-col gap-5 max-w-96 p-5"
     />
         @csrf
+        <section class="flex flex-col w-full">
+            <label for="judulfoto">Judul Foto</label>
+            <input
+                type="text"
+                name="judulfoto"
+                id="judulfoto"
+                class=" text-slate-800"
+            />
+        </section>
+        <section class="flex flex-col w-full">
+            <label for="deskripsifoto">Deskripsi</label>
+            <textarea
+                name="deskripsifoto"
+                id="deskripsifoto"
+                class="min-h-[30px] max-h-[60px] text-slate-800"
+            ></textarea>
+        </section>
         <section
-            class="flex flex-col"
+            class="flex flex-col w-full"
         >
             <label
                 for="image"
