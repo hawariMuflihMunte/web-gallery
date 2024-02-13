@@ -22,6 +22,11 @@ class LoginController extends Controller
         ]);
 
         $user = User::where('Username', $credentials['username'])->first();
+
+        if (is_null($user)) {
+            return redirect()->back()->with('error-login', 'Akun tidak ditemukan. Coba lagi');
+        }
+
         $authPassword = password_verify($credentials['password'], $user['Password']);
 
         if ($authPassword) {
@@ -30,6 +35,6 @@ class LoginController extends Controller
             return redirect()->route('gallery.index');
         }
 
-        return redirect()->back()->with('status', 'Akun tidak ditemukan. Coba lagi');
+        return redirect()->back()->with('error-login', 'Akun tidak ditemukan. Coba lagi');
     }
 }

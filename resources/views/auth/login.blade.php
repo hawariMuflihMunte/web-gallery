@@ -14,7 +14,10 @@ main {
 @section('content')
     <main class="min-w-full min-h-full h-[100vh] flex items-center justify-center">
         @session('success-register')
-            <x-alert type="success" title="Pendaftaran berhasil!" :message="session('success-register')"></x-alert>
+            <x-alert title="Pendaftaran berhasil!" :message="session('success-register')"></x-alert>
+        @endsession
+        @session('error-login')
+            <x-alert title="Gagal masuk!" :message="session('error-login')"></x-alert>
         @endsession
         <section class="glass_morphism p-10 max-w-96 flex flex-col gap-4 text-gray-700 w-full">
             <h1 class="text-2xl">Masuk</h1>
@@ -29,6 +32,7 @@ main {
                         id="username"
                         autofocus
                         class="glass_morphism_blue_bg rounded-md px-2 py-1 outline-none text-slate-700 font-serif"
+                        value="{{ old('username') }}"
                     />
                 </section>
                 <section class="flex flex-col" x-data="{
