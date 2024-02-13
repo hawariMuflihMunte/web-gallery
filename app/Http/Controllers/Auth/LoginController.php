@@ -27,7 +27,7 @@ class LoginController extends Controller
         if ($authPassword) {
             Auth::login($user);
 
-            return redirect()->route('home');
+            return redirect()->route('gallery.index');
         }
 
         return redirect()->back()->with('status', 'Akun tidak ditemukan. Coba lagi');
