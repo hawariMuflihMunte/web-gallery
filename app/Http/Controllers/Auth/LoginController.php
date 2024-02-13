@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -16,14 +17,19 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'username' => ['required', 'string', 'min:1'],
-            'password' => ['required', 'min:8'],
+            'username' => 'required|string|min:1',
+            'password' => 'required|string|min:8',
         ]);
 
-        $auth = User::where('Username', $credentials['username'])->first();
-        $authPassword = password_verify($credentials['password'], $auth['Password']);
-        $checkExisted = User::where('Username', 'hawariMuflih')->get();
+        $user = User::where('Username', $credentials['username'])->first();
+        $authPassword = password_verify($credentials['password'], $user['Password']);
 
-        dd($auth, $authPassword, $checkExisted);
+        if ($authPassword) {
+            Auth::login($user);
+
+            return redirect()->route('home');
+        }
+
+        return redirect()->back()->with('status', 'Akun tidak ditemukan. Coba lagi');
     }
 }

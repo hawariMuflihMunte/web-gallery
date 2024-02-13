@@ -19,12 +19,13 @@ Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate'])->middleware('auth');
+Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::group([
     'middleware' => 'auth',
 ], function () {
     Route::get('/', function () {
         return view('home');
-    });
+    })->name('home');
+
 });
