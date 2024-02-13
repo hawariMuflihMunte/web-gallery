@@ -5,24 +5,6 @@
 @section('content')
   <nav class="w-full fixed min-h-10 flex items-center px-5 py-2 text-gray-700 justify-between z-50">
     <h1 class="text-2xl italic font-semibold">Web Gallery</h1>
-    <ul class="flex items-center gap-5">
-      <li>
-        <a
-          href="/register"
-          class="hover:text-black duration-150"
-        >
-          Daftar
-        </a>
-      </li>
-      <li>
-        <a
-          href="/login"
-          class="glass_morphism_navy_bg rounded-md px-2 py-1 flex content-center hover:text-black duration-150"
-        >
-          Masuk
-        </a>
-      </li>
-    </ul>
   </nav>
   <main class="min-w-full min-h-full h-[100vh] pt-28">
     <section

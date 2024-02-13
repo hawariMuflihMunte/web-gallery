@@ -27,5 +27,4 @@ Route::group([
     Route::get('/', function () {
         return view('home');
     })->name('home');
-
 });
