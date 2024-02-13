@@ -5,6 +5,9 @@
 @section('content')
   <nav class="w-full fixed min-h-10 flex items-center px-5 py-2 text-gray-700 justify-between z-50">
     <h1 class="text-2xl italic font-semibold">Web Gallery</h1>
+    <section>
+      <a href="{{ route('logout') }}">Keluar</a>
+    </section>
   </nav>
   <main class="min-w-full min-h-full h-[100vh] pt-28">
     <section
