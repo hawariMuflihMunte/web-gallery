@@ -48,7 +48,7 @@
       </a>
     </section>
   </main>
-  <footer class="px-4 py-5 flex border-t-2 border-t-gray-400">
+  <footer class="px-4 py-5 flex border-t-2 border-t-slate-200">
     <section class="flex">
       <h3 class="text-lg font-semibold">Web Gallery <span class="font-normal">@ {{ now()->year }}</span></h3>
     </section>
