@@ -13,6 +13,9 @@ main {
 
 @section('content')
     <main class="min-w-full min-h-full h-[100vh] flex items-center justify-center">
+        @session('error-register')
+            <x-alert title="Gagal daftar!" :message="session('error-register')"></x-alert>
+        @endsession
         <section class="glass_morphism p-10 max-w-96 flex flex-col gap-4 text-gray-700 w-full">
             <h1 class="text-2xl">Daftar</h1>
             <hr class="border-current">
