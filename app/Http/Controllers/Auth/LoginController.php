@@ -35,6 +35,6 @@ class LoginController extends Controller
             return redirect()->route('gallery.index');
         }
 
-        return redirect()->back()->with('error-login', 'Akun tidak ditemukan. Coba lagi');
+        return redirect()->back()->with('error-login', 'Akun tidak ditemukan. Coba lagi')->withInput();
     }
 }
