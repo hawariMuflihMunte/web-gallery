@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Web Gallery Register')
+@section('title', 'Web Gallery | Login')
 
 @section('additional-head-props')
 <style>

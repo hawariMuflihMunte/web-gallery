@@ -1,11 +1,13 @@
 <nav
     class="w-full fixed min-h-10 flex items-center px-5 py-3 text-gray-700 justify-between z-50 border-b-2 border-b-slate-300 bg-teal-200"
     x-data="{
-      openList: false,
-      logoutConfirm: false,
+        openList: false,
+        logoutConfirm: false,
     }"
 >
-    <h1 class="text-2xl italic font-semibold">Web Gallery</h1>
+    <h1 class="shadow-lg border border-slate-400 rounded-sm">
+        <img src="{{ asset('favicon-32x32.png') }}" alt="Web Gallery">
+    </h1>
     <section class="relative">
         <button
             type="button"

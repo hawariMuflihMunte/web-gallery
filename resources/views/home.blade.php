@@ -15,7 +15,7 @@
       class="flex justify-center sm:justify-start gap-4 flex-wrap max-w-[92%] md:max-w-[80%] mx-auto"
     >
       <a
-        href="#"
+        href="{{ route('gallery.create') }}"
         class="flex flex-col bg-emerald-300 text-slate-700 font-bold rounded-sm max-w-[200px] md:max-w-[240px] lg:min-w-[300px] overflow-hidden cursor-pointer border border-slate-400"
         role="article"
         x-data="{
@@ -40,6 +40,6 @@
     </section>
   </main>
 
-  @include('layouts.nav')
+  @include('layouts.footer')
 
 @endsection
