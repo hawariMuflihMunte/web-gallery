@@ -32,7 +32,7 @@ class LoginController extends Controller
         if ($authPassword) {
             Auth::login($user);
 
-            return redirect()->route('gallery.index');
+            return redirect()->route('gallery.index')->with('success-login', "Selamat datang {$credentials['username']} !");
         }
 
         return redirect()->back()->with('error-login', 'Akun tidak ditemukan. Coba lagi')->withInput();

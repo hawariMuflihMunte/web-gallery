@@ -18,7 +18,7 @@
             class="glass_morphism_navy_bg px-3 py-1 rounded-md"
             x-on:click="show = false"
         >
-        Close
+            Batal
         </button>
     </section>
 </section>
