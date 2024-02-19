@@ -27,7 +27,18 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $albumMessage = [
+            'namaalbum.min' => 'Masukkan minimal 1 karakter !',
+            'deskripsi.min' => 'Masukkan minimal 1 karakter !',
+        ];
+
+        $album = $request->validate([
+            'namaalbum' => 'required|string|min:1',
+            'deskripsi' => 'required|string|min:1',
+            'tanggaldibuat' => 'required|integer',
+        ], $albumMessage);
+
+        dd($album);
     }
 
     /**
