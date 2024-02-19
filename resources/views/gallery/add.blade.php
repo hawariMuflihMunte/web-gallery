@@ -68,7 +68,7 @@
                         <input
                             type="text"
                             name="namaalbum"
-                            id="deskripsi"
+                            id="namaalbum"
                             class="bg-slate-200 border border-slate-300 rounded-sm outline-none px-2 py-1"
                             autofocus
                         />
@@ -132,6 +132,28 @@
                                     @change="fileChosen"
                                     class="file:hidden cursor-pointer"
                                 />
+                                <section class="flex flex-col gap-3">
+                                    <section class="flex flex-col">
+                                        <label for="judulfoto">Judul</label>
+                                        <input
+                                            type="text"
+                                            name="judulfoto[]"
+                                            id="judulfoto"
+                                            multiple
+                                            class="bg-slate-200 border border-slate-300 rounded-sm outline-none px-2 py-1"
+                                        />
+                                    </section>
+                                    <section class="flex flex-col">
+                                        <label for="deskripsifoto">Deskripsi</label>
+                                        <input
+                                            type="text"
+                                            name="deskripsifoto[]"
+                                            id="deskripsifoto"
+                                            multiple
+                                            class="bg-slate-200 border border-slate-300 rounded-sm outline-none px-2 py-1"
+                                        />
+                                    </section>
+                                </section>
                             </article>
                         </template>
                     </section>
