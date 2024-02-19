@@ -38,7 +38,12 @@ class GalleryController extends Controller
             'tanggaldibuat' => 'required|integer',
         ], $albumMessage);
 
-        dd($album);
+        $foto = $request->validate([
+            'judulfoto' => 'required|string|min:1',
+            'deskripsifoto' => 'required|string|min:1',
+        ]);
+
+        dd($album, $foto);
     }
 
     /**
