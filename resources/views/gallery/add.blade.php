@@ -39,6 +39,7 @@
                     action="{{ route('gallery.store') }}"
                     method="post"
                     enctype="multipart/form-data"
+                    autocomplete="off"
                     class="bg-slate-100 px-5 py-6 rounded-sm border border-slate-300 shadow-md"
                     x-data="{
                         imageCount: 1,
