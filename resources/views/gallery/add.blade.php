@@ -69,6 +69,7 @@
                             name="namaalbum"
                             id="deskripsi"
                             class="bg-slate-200 border border-slate-300 rounded-sm outline-none px-2 py-1"
+                            autofocus
                         />
                     </section>
                     <section class="flex flex-col my-5">
