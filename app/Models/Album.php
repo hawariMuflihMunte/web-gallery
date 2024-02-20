@@ -21,6 +21,7 @@ class Album extends Model
         'NamaAlbum',
         'Deskripsi',
         'TanggalDibuat',
+        'UserID',
     ];
 
     public function foto(): HasMany
