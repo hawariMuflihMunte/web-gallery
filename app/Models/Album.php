@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Album extends Model
 {
     protected $table = 'album';
-    protected $primaryKey = ' AlbumID';
+    protected $primaryKey = 'AlbumID';
     public $timestamps = false;
 
     /**
@@ -26,7 +26,7 @@ class Album extends Model
 
     public function foto(): HasMany
     {
-        return $this->hasMany(Foto::class, 'FotoID');
+        return $this->hasMany(Foto::class, 'AlbumID');
     }
 
     public function user(): BelongsTo
