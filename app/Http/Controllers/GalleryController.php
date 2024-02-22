@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
+use App\Models\Foto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GalleryController extends Controller
 {
@@ -11,7 +14,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $albums = Album::all('AlbumID', 'NamaAlbum');
+
+        return view('home', compact('albums'));
     }
 
     /**
@@ -35,15 +40,57 @@ class GalleryController extends Controller
         $album = $request->validate([
             'namaalbum' => 'required|string|min:1',
             'deskripsi' => 'required|string|min:1',
-            'tanggaldibuat' => 'required|integer',
         ], $albumMessage);
 
         $foto = $request->validate([
-            'judulfoto' => 'required|string|min:1',
-            'deskripsifoto' => 'required|string|min:1',
+            'judulfoto' => 'required|min:1',
+            'deskripsifoto' => 'required|min:1',
         ]);
 
-        dd($album, $foto);
+        $imagesMessage = [
+            'images.max' => 'Ukuran maksimal file adalah 2MB !'
+        ];
+
+        $request->validate([
+            'images' => 'required',
+            'images.*' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ], $imagesMessage);
+
+        // dd($request->file('images')[0]->getClientOriginalName(), $request->file('images'));
+
+        $currentDate = date('Y-m-d');
+        $currentUserID = Auth::id();
+
+        $newAlbum = Album::create([
+            'NamaAlbum' => $album['namaalbum'],
+            'Deskripsi' => $album['deskripsi'],
+            'TanggalDibuat' => $currentDate,
+            'UserID' => $currentUserID,
+        ]);
+
+        $currentAlbumID = $newAlbum['AlbumID'];
+
+        for ($i = 0; $i < count($foto) - 1; $i++) {
+            $filename = preg_replace('/[^a-zA-Z0-9]/', "", strtolower($request->file('images')[$i]->getClientOriginalName()));
+            $extension = $request->file('images')[$i]->getClientOriginalExtension();
+            $filenameWithoutExtension = str_replace($extension, '', $filename);
+            $filenameWithExtension = $filenameWithoutExtension.".".$extension;
+            $filterAlbum = preg_replace('/[^a-zA-Z0-9]/', "", strtolower($album['namaalbum']));
+            $filepath = $request->file('images')[$i]->storeAs($filterAlbum, $filenameWithExtension, 'public');
+
+            // dd($filename, $filenameWithoutExtension, $filenameWithExtension, $filepath);
+
+            Foto::create([
+                'JudulFoto' => $foto['judulfoto'][$i],
+                'DeskripsiFoto' => $foto ['deskripsifoto'][$i],
+                'TanggalUnggah' => $currentDate,
+                'LokasiFile' => $filepath,
+                'AlbumID' => $currentAlbumID,
+                'UserID' => $currentUserID,
+            ]);
+        }
+
+        return redirect()->route('gallery.index')->with('insert-success', 'Berhasil menambahkan album baru !');
     }
 
     /**
@@ -59,7 +106,10 @@ class GalleryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $album = Album::find($id);
+        $foto = $album->foto()->get();
+
+        dd($album, $foto);
     }
 
     /**
