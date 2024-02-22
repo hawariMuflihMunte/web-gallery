@@ -6,7 +6,7 @@
 
     @include('layouts.nav')
 
-    <main class="min-w-full min-h-full h-[100vh] py-28">
+    <main class="min-w-full min-h-[100vh] pt-28">
         <section
             x-data="{
                 imageUrl: '',
@@ -114,6 +114,15 @@
                         role="group"
                         class="max-h-32 overflow-y-scroll py-1"
                     >
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                         <template x-for="count in imageCount">
                             <article
                                 class="flex items-center gap-3 h-max px-1 py-3 bg-slate-300 w-full"
@@ -128,7 +137,6 @@
                                     name="images[]"
                                     :id="count"
                                     accept="image/*"
-                                    multiple
                                     @change="fileChosen"
                                     class="file:hidden cursor-pointer"
                                 />
@@ -139,7 +147,6 @@
                                             type="text"
                                             name="judulfoto[]"
                                             id="judulfoto"
-                                            multiple
                                             class="bg-slate-200 border border-slate-300 rounded-sm outline-none px-2 py-1"
                                         />
                                     </section>
@@ -149,7 +156,6 @@
                                             type="text"
                                             name="deskripsifoto[]"
                                             id="deskripsifoto"
-                                            multiple
                                             class="bg-slate-200 border border-slate-300 rounded-sm outline-none px-2 py-1"
                                         />
                                     </section>

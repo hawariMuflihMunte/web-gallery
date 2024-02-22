@@ -6,7 +6,7 @@
 
   @include('layouts.nav')
 
-  <main class="min-w-full min-h-full h-[100vh] pt-28">
+  <main class="min-w-full min-h-[100vh] pt-28">
     @session('success-login')
       <x-alert title="Selamat Datang !" :message="session('success-login')"></x-alert>
     @endsession
