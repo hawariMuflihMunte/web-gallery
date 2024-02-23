@@ -109,7 +109,7 @@ class GalleryController extends Controller
         $album = Album::find($id);
         $foto = $album->foto()->get();
 
-        dd($album, $foto);
+        return view('gallery.details', compact('album', 'foto'));
     }
 
     /**
@@ -117,7 +117,18 @@ class GalleryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $album = Album::find($id);
+
+        $newData = $request->validate([
+            'namaalbum' => 'required|min:1|regex:/[^a-zA-Z0-9]/',
+            'deskripsi' => 'required|min:1',
+        ]);
+
+        $album['NamaAlbum'] = $newData['namaalbum'];
+        $album['Deskripsi'] = $newData['deskripsi'];
+        $album->save();
+
+        return redirect()->route('gallery.edit', $album)->with('update-success', 'Berhasil memperbarui data album !');
     }
 
     /**
@@ -125,6 +136,8 @@ class GalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete = Album::destroy($id);
+
+        return redirect()->route('gallery.index')->with('destroy-success', 'Berhasil menghapus album !');
     }
 }

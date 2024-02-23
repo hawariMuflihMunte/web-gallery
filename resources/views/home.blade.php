@@ -10,6 +10,9 @@
     @session('success-login')
       <x-alert title="Selamat Datang !" :message="session('success-login')"></x-alert>
     @endsession
+    @session('destroy-success')
+      <x-alert title="Berhasil !" :message="session('destroy-success')"></x-alert>
+    @endsession
     <section
       role="group"
       class="flex justify-center sm:justify-start gap-4 flex-wrap max-w-[92%] md:max-w-[80%] mx-auto"
