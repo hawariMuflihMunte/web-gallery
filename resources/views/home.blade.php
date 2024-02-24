@@ -62,7 +62,7 @@
         >
           <section class="w-full">
             <img
-              src="{{ asset("images/bg_add_image.png") }}"
+              src="{{ url('/storage/'.$album->foto()->get()->first()['LokasiFile']) }}"
               alt="illustration"
               class="h-auto w-full"
               x-show="showImage"
