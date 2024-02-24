@@ -69,7 +69,7 @@ class GalleryController extends Controller
 
         $currentAlbumID = $newAlbum['AlbumID'];
 
-        for ($i = 0; $i < count($foto) - 1; $i++) {
+        for ($i = 0; $i < count($request->file('images')); $i++) {
             $filename = preg_replace('/[^a-zA-Z0-9]/', "", strtolower($request->file('images')[$i]->getClientOriginalName()));
             $extension = $request->file('images')[$i]->getClientOriginalExtension();
             $filenameWithoutExtension = str_replace($extension, '', $filename);

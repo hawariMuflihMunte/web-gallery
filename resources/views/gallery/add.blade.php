@@ -80,13 +80,6 @@
               class="rounded-sm border border-slate-300 bg-slate-200 px-2 py-1 outline-none"
             ></textarea>
           </section>
-          <input
-            type="datetime"
-            name="tanggaldibuat"
-            id="tanggaldibuat"
-            :value="+new Date()"
-            class="hidden"
-          />
           <h2 class="text-lg font-medium">
             Gambar (
             <span x-text="imageCount"></span>

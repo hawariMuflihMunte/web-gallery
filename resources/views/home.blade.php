@@ -12,6 +12,12 @@
         :message="session('success-login')"
       ></x-alert>
     @endsession
+    @session("insert-success")
+      <x-alert
+        title="Selamat Datang !"
+        :message="session('success-login')"
+      ></x-alert>
+    @endsession
 
     @session("destroy-success")
       <x-alert
@@ -63,8 +69,9 @@
           <section class="w-full">
             <img
               src="{{ url('/storage/'.$album->foto()->get()->first()['LokasiFile']) }}"
-              alt="illustration"
+              alt="{{ $album->foto()->get()->first()['DeskripsiFoto'] }}"
               class="h-auto w-full"
+              loading="lazy"
               x-show="showImage"
               x-transition.duration.200ms
             />
