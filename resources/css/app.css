@@ -4,49 +4,49 @@
 
 @layer components {
   .glass_morphism {
-    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[6.3px] border rounded-2xl border-solid border-[rgba(255,255,255,0.88)];
+    @apply rounded-2xl border border-solid border-[rgba(255,255,255,0.88)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[6.3px];
     background: rgba(255, 255, 255, 0.65);
     -webkit-backdrop-filter: blur(6.3px);
   }
 
   .glass_morphism_bg {
-    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[6.3px] border border-solid border-[rgba(255,255,255,0.88)];
+    @apply border border-solid border-[rgba(255,255,255,0.88)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[6.3px];
     background: rgba(255, 255, 255, 0.65);
     -webkit-backdrop-filter: blur(6.3px);
   }
 
   .glass_morphism_blue_bg {
-    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px] border border-solid border-[rgba(0,216,251,0.89)];
+    @apply border border-solid border-[rgba(0,216,251,0.89)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px];
     background: rgba(0, 216, 251, 0.51);
     -webkit-backdrop-filter: blur(14.5px);
   }
 
   .glass_morphism_yellow_bg {
-    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px] border border-solid border-[rgba(255,226,78,0.89)];
+    @apply border border-solid border-[rgba(255,226,78,0.89)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px];
     background: rgba(255, 226, 78, 0.36);
     -webkit-backdrop-filter: blur(14.5px);
   }
 
   .glass_morphism_red_bg {
-    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px] border border-solid border-[rgba(255,83,60,0.89)]; /* From https://css.glass */
+    @apply border border-solid border-[rgba(255,83,60,0.89)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px]; /* From https://css.glass */
     background: rgba(255, 83, 60, 0.56);
     -webkit-backdrop-filter: blur(14.5px);
   }
 
   .glass_morphism_purple_bg {
-    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px] border border-solid border-[rgba(170,46,216,0.89)]; /* From https://css.glass */
+    @apply border border-solid border-[rgba(170,46,216,0.89)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px]; /* From https://css.glass */
     background: rgba(170, 46, 216, 0.5);
     -webkit-backdrop-filter: blur(14.5px);
   }
 
   .glass_morphism_pink_bg {
-    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px] border border-solid border-[rgba(255,95,183,0.89)]; /* From https://css.glass */
+    @apply border border-solid border-[rgba(255,95,183,0.89)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px]; /* From https://css.glass */
     background: rgba(255, 95, 183, 0.5);
     -webkit-backdrop-filter: blur(14.5px);
   }
 
   .glass_morphism_navy_bg {
-    @apply shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px] border border-solid border-[rgba(65,89,240,0.89)]; /* From https://css.glass */
+    @apply border border-solid border-[rgba(65,89,240,0.89)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[14.5px]; /* From https://css.glass */
     background: rgba(65, 89, 240, 0.47);
     -webkit-backdrop-filter: blur(14.5px);
   }

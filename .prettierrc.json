@@ -1,0 +1,22 @@
+{
+  "tabWidth": 2,
+  "trailingCommaPHP": true,
+  "semi": true,
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "singleAttributePerLine": true,
+  "printWidth": 100,
+  "plugins": [
+    "@prettier/plugin-php",
+    "prettier-plugin-blade",
+    "prettier-plugin-tailwindcss"
+  ],
+  "overrides": [
+    {
+      "files": ["*.blade.php"],
+      "options": {
+        "parser": "blade"
+      }
+    }
+  ]
+}
