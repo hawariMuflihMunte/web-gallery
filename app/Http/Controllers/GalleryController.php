@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\Foto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -55,8 +56,6 @@ class GalleryController extends Controller
             'images' => 'required',
             'images.*' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ], $imagesMessage);
-
-        // dd($request->file('images')[0]->getClientOriginalName(), $request->file('images'));
 
         $currentDate = date('Y-m-d');
         $currentUserID = Auth::id();
@@ -136,7 +135,24 @@ class GalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        $delete = Album::destroy($id);
+        $album = Album::find($id);
+        $foto = [];
+        foreach ($album->foto()->get() as $f) {
+            array_push($foto, $f);
+        }
+
+        foreach ($foto as $f) {
+            $splitStr = explode('/', $f['LokasiFile']);
+            $path = join('\\', $splitStr);
+
+            if (!Storage::disk('public')->has($path)) {
+                dd($foto, $f['LokasiFile'], 'File doesn\'t exist !');
+            }
+
+            Storage::disk('public')->delete($path);
+        }
+
+        Album::destroy($id);
 
         return redirect()->route('gallery.index')->with('destroy-success', 'Berhasil menghapus album !');
     }
