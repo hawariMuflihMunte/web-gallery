@@ -5,7 +5,9 @@
         "dev": "vite",
         "build": "vite build",
         "prettier:check": "prettier --check --ignore-path .gitignore resources/",
-        "prettier:fix": "prettier --write --ignore-path .gitignore resources/"
+        "prettier:fix": "prettier --write --ignore-path .gitignore resources/",
+        "prettier:controller:check": "prettier --check --ignore-path .gitignore app/Http/Controllers",
+        "prettier:controller:fix": "prettier --write --ignore-path .gitignore app/Http/Controllers"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.22.2",

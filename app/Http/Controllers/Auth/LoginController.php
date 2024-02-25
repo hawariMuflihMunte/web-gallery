@@ -9,32 +9,34 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index()
-    {
-        return view('auth.login');
+  public function index()
+  {
+    return view("auth.login");
+  }
+
+  public function authenticate(Request $request)
+  {
+    $credentials = $request->validate([
+      "username" => "required|string|min:1",
+      "password" => "required|string|min:8",
+    ]);
+
+    $user = User::where("Username", $credentials["username"])->first();
+
+    if (is_null($user)) {
+      return redirect()->back()->with("error-login", "Akun tidak ditemukan. Coba lagi");
     }
 
-    public function authenticate(Request $request)
-    {
-        $credentials = $request->validate([
-            'username' => 'required|string|min:1',
-            'password' => 'required|string|min:8',
-        ]);
+    $authPassword = password_verify($credentials["password"], $user["Password"]);
 
-        $user = User::where('Username', $credentials['username'])->first();
+    if ($authPassword) {
+      Auth::login($user);
 
-        if (is_null($user)) {
-            return redirect()->back()->with('error-login', 'Akun tidak ditemukan. Coba lagi');
-        }
-
-        $authPassword = password_verify($credentials['password'], $user['Password']);
-
-        if ($authPassword) {
-            Auth::login($user);
-
-            return redirect()->route('gallery.index')->with('success-login', "Selamat datang {$credentials['username']} !");
-        }
-
-        return redirect()->back()->with('error-login', 'Akun tidak ditemukan. Coba lagi')->withInput();
+      return redirect()
+        ->route("gallery.index")
+        ->with("success-login", "Selamat datang {$credentials["username"]} !");
     }
+
+    return redirect()->back()->with("error-login", "Akun tidak ditemukan. Coba lagi")->withInput();
+  }
 }
