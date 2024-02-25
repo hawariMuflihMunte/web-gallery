@@ -52,16 +52,16 @@ class User extends Authenticatable
 
     public function foto(): HasMany
     {
-        return $this->hasMany(Foto::class, 'FotoID');
+        return $this->hasMany(Foto::class, 'UserID');
     }
 
     public function komentarfoto(): HasMany
     {
-        return $this->hasMany(KomentarFoto::class, 'KomentarID');
+        return $this->hasMany(KomentarFoto::class, 'UserID');
     }
 
     public function likefoto(): HasMany
     {
-        return $this->hasMany(LikeFoto::class, 'LikeID');
+        return $this->hasMany(LikeFoto::class, 'UserID');
     }
 }

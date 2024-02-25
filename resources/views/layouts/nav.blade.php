@@ -1,47 +1,55 @@
 <nav
-  class="fixed z-50 flex min-h-10 w-full items-center justify-between border-b-2 border-b-slate-300 bg-teal-200 px-5 py-3 text-gray-700"
+  class="fixed z-50 flex min-h-10 w-full items-center justify-between border-b-2 border-b-slate-300 bg-blue-100 px-5 py-3 text-gray-700"
   x-data="{
     openList: false,
     logoutConfirm: false,
   }"
 >
-  <h1 class="rounded-sm border border-slate-400 shadow-lg">
+  <a
+    href="{{ url()->current() }}"
+    class="flex rounded-sm border border-slate-400 shadow-lg"
+  >
     <img
       src="{{ asset("favicon-32x32.png") }}"
       alt="Web Gallery"
     />
-  </h1>
-  <section class="relative">
+  </a>
+  <section class="flex">
     <button
       type="button"
       class="glass_morphism_bg border border-slate-300 px-3 py-1 text-lg outline-none transition duration-100 hover:opacity-80"
       @click="openList = !openList"
+      @click.outside="openList = false"
     >
       <i class="bi-list"></i>
     </button>
     <template x-if="openList">
-      <section class="glass_morphism_bg absolute right-0 border-slate-300 py-2 shadow-md">
-        <ul class="flex flex-col gap-4">
-          <li>
-            <a
-              href="#"
-              class="flex items-center gap-2 bg-inherit px-5 py-2 text-slate-800 transition-all duration-100 hover:opacity-60 hover:brightness-125"
-            >
-              <i class="bi-person-circle"></i>
-              Profil
-            </a>
-          </li>
-          <li>
-            <button
-              type="button"
-              class="flex items-center gap-2 bg-red-500 px-5 py-2 text-white transition-all duration-100 hover:bg-red-400"
-              @click="logoutConfirm = true"
-            >
-              <i class="bi-x-square"></i>
-              Keluar
-            </button>
-          </li>
-        </ul>
+      <section class="relative">
+        <section
+          class="glass_morphism_bg absolute right-0 top-full border-slate-300 py-2 shadow-md"
+        >
+          <ul class="flex flex-col gap-4">
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 bg-inherit px-5 py-2 text-slate-800 transition-all duration-100 hover:opacity-60 hover:brightness-125"
+              >
+                <i class="bi-person-circle"></i>
+                Profil
+              </a>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="flex items-center gap-2 bg-red-500 px-5 py-2 text-white transition-all duration-100 hover:bg-red-400"
+                @click="logoutConfirm = true"
+              >
+                <i class="bi-x-square"></i>
+                Keluar
+              </button>
+            </li>
+          </ul>
+        </section>
       </section>
     </template>
   </section>

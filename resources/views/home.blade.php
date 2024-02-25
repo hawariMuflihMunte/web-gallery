@@ -5,17 +5,18 @@
 @section("content")
   @include("layouts.nav")
 
-  <main class="min-h-[100vh] min-w-full pt-28">
+  <main class="min-h-[100vh] min-w-full py-28">
     @session("success-login")
       <x-alert
         title="Selamat Datang !"
         :message="session('success-login')"
       ></x-alert>
     @endsession
+
     @session("insert-success")
       <x-alert
         title="Selamat Datang !"
-        :message="session('success-login')"
+        :message="session('insert-success')"
       ></x-alert>
     @endsession
 
@@ -26,63 +27,101 @@
       ></x-alert>
     @endsession
 
-    <section
-      role="group"
-      class="mx-auto flex max-w-[92%] flex-wrap justify-center gap-4 sm:justify-start md:max-w-[80%]"
-    >
-      <a
-        href="{{ route("gallery.create") }}"
-        class="flex max-w-[200px] cursor-pointer flex-col overflow-hidden rounded-sm border border-slate-400 bg-emerald-300 font-bold text-slate-700 md:max-w-[240px] lg:min-w-[300px]"
-        role="article"
-        x-data="{
-          showImage: false,
-        }"
-        x-on:mouseover="showImage = true"
-        x-on:mouseleave="showImage = false"
+    <section class="mx-auto max-w-[92%] md:max-w-[80%]">
+      <h1 class="mb-12 text-2xl font-semibold">Album</h1>
+      <section
+        role="group"
+        class="grid max-h-[500px] grid-cols-1 gap-5 overflow-y-scroll sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
-        <section class="w-full">
-          <img
-            src="{{ asset("images/bg_add_image.png") }}"
-            alt="illustration"
-            class="h-auto w-full"
-            x-show="showImage"
-            x-transition.duration.200ms
-          />
-        </section>
-        <section
-          class="flex w-full min-w-[200px] items-center justify-center py-4 text-inherit md:min-w-[240px] lg:min-w-[300px]"
-        >
-          <h2>Tambah Album</h2>
-        </section>
-      </a>
-      @foreach ($albums as $album)
-        <a
-          href="{{ route("gallery.edit", $album["AlbumID"]) }}"
-          class="flex max-w-[200px] cursor-pointer flex-col overflow-hidden rounded-sm border border-slate-400 bg-emerald-300 font-bold text-slate-700 md:max-w-[240px] lg:min-w-[300px]"
-          role="article"
-          x-data="{
-            showImage: false,
-          }"
-          x-on:mouseover="showImage = true"
-          x-on:mouseleave="showImage = false"
-        >
-          <section class="w-full">
-            <img
-              src="{{ url('/storage/'.$album->foto()->get()->first()['LokasiFile']) }}"
-              alt="{{ $album->foto()->get()->first()['DeskripsiFoto'] }}"
-              class="h-auto w-full"
-              loading="lazy"
-              x-show="showImage"
-              x-transition.duration.200ms
-            />
-          </section>
-          <section
-            class="flex w-full min-w-[200px] items-center justify-center py-4 text-inherit md:min-w-[240px] lg:min-w-[300px]"
+        @foreach ($albums as $album)
+          <a
+            href="{{ route("gallery.edit", $album["AlbumID"]) }}"
+            class="flex h-max cursor-pointer flex-col overflow-hidden rounded-sm border border-slate-400 bg-slate-200 font-bold text-slate-700"
+            role="article"
+            x-data="{
+              imageHovered: false,
+            }"
+            x-on:mouseover="imageHovered = true"
+            x-on:mouseleave="imageHovered = false"
           >
-            <h2>{{ $album["NamaAlbum"] }}</h2>
-          </section>
-        </a>
-      @endforeach
+            <section class="w-full">
+              <img
+                src="{{ url("/storage/" .$album->foto()->get()->first()["LokasiFile"],) }}"
+                alt="{{ $album->foto()->get()->first()["DeskripsiFoto"] }}"
+                class="h-auto w-full duration-200 ease-linear"
+                loading="lazy"
+                :class="imageHovered ? 'scale-100' : 'scale-95'"
+              />
+            </section>
+            <section
+              class="flex max-h-16 w-full items-center justify-center text-clip border-t border-t-slate-400 bg-slate-100 py-4 text-inherit"
+            >
+              <h2>{{ $album["NamaAlbum"] }}</h2>
+            </section>
+          </a>
+        @endforeach
+      </section>
+
+      <section class="mt-40">
+        <h1 class="mb-12 text-2xl font-semibold">Album {{ $user["Username"] }}</h1>
+        <section
+          role="group"
+          class="grid max-h-[500px] grid-cols-1 gap-5 overflow-y-scroll sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        >
+          <a
+            href="{{ route("gallery.create") }}"
+            class="flex h-max cursor-pointer flex-col overflow-hidden rounded-sm border border-slate-400 bg-slate-200 font-bold text-slate-700"
+            role="article"
+            x-data="{
+              imageHovered: false,
+            }"
+            x-on:mouseover="imageHovered = true"
+            x-on:mouseleave="imageHovered = false"
+          >
+            <section class="w-full">
+              <img
+                src="{{ asset("images/bg_add_image.png") }}"
+                alt="illustration"
+                class="h-auto w-full duration-200 ease-linear"
+                loading="lazy"
+                :class="imageHovered ? 'scale-100' : 'scale-95'"
+              />
+            </section>
+            <section
+              class="flex max-h-16 w-full items-center justify-center text-clip border-t border-t-slate-400 bg-slate-100 py-4 text-inherit"
+            >
+              <h2>Tambah Album</h2>
+            </section>
+          </a>
+          @foreach ($user->album()->get() as $album)
+            <a
+              href="{{ route("gallery.edit", $album["AlbumID"]) }}"
+              class="flex h-max cursor-pointer flex-col overflow-hidden rounded-sm border border-slate-400 bg-slate-200 font-bold text-slate-700"
+              role="article"
+              x-data="{
+                imageHovered: false,
+              }"
+              x-on:mouseover="imageHovered = true"
+              x-on:mouseleave="imageHovered = false"
+            >
+              <section class="w-full">
+                <img
+                  src="{{ url("/storage/" .$album->foto()->get()->first()["LokasiFile"],) }}"
+                  alt="{{ $album->foto()->get()->first()["DeskripsiFoto"] }}"
+                  class="h-auto w-full duration-200 ease-linear"
+                  loading="lazy"
+                  :class="imageHovered ? 'scale-100' : 'scale-95'"
+                />
+              </section>
+              <section
+                class="flex max-h-16 w-full items-center justify-center text-clip border-t border-t-slate-400 bg-slate-100 py-4 text-inherit"
+              >
+                <h2>{{ $album["NamaAlbum"] }}</h2>
+              </section>
+            </a>
+          @endforeach
+        </section>
+      </section>
     </section>
   </main>
 

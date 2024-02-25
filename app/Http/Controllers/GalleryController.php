@@ -15,9 +15,10 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $albums = Album::all('AlbumID', 'NamaAlbum');
+        $albums = Album::all();
+        $user = Auth::user();
 
-        return view('home', compact('albums'));
+        return view('home', compact('albums', 'user'));
     }
 
     /**
@@ -108,7 +109,19 @@ class GalleryController extends Controller
         $album = Album::find($id);
         $foto = $album->foto()->get();
 
-        return view('gallery.details', compact('album', 'foto'));
+        /**
+         * return current signed-in user to check
+         * whether they own the album or not.
+         */
+        $currentUserID = Auth::id();
+        $albumOwnerID = $album->user()->get()->first()['UserID'];
+        $editable = true;
+
+        if ($currentUserID != $albumOwnerID) {
+            $editable = false;
+        }
+
+        return view('gallery.details', compact('album', 'foto', 'editable'));
     }
 
     /**
