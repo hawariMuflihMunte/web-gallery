@@ -18,7 +18,7 @@ class GalleryController extends Controller
   public function index(): View|RedirectResponse
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $albums = Album::all();
@@ -33,7 +33,7 @@ class GalleryController extends Controller
   public function create(): View
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     return view("gallery.add");
@@ -45,7 +45,7 @@ class GalleryController extends Controller
   public function store(Request $request): RedirectResponse
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $albumMessage = [
@@ -135,7 +135,7 @@ class GalleryController extends Controller
   public function edit(string $id): View
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $album = Album::find($id);
@@ -162,7 +162,7 @@ class GalleryController extends Controller
   public function update(Request $request, string $id): RedirectResponse
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $album = Album::find($id);
@@ -187,7 +187,7 @@ class GalleryController extends Controller
   public function destroy(string $id): RedirectResponse
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $album = Album::find($id);

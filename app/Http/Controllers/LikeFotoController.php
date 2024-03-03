@@ -31,7 +31,7 @@ class LikeFotoController extends Controller
   public function store(Request $request)
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $userID = Auth::id();
@@ -83,7 +83,7 @@ class LikeFotoController extends Controller
   public function destroy(string $id)
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $likefoto = LikeFoto::find($id);

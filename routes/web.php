@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LikeFotoController;
-use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 /*

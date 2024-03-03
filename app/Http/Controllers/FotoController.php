@@ -34,7 +34,7 @@ class FotoController extends Controller
   public function store(Request $request)
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $foto = $request->validate([
@@ -99,7 +99,7 @@ class FotoController extends Controller
   public function edit(string $id): View
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $foto = Foto::find($id);
@@ -122,7 +122,10 @@ class FotoController extends Controller
       $liked = true;
     }
 
-    return view("foto.details", compact("foto", "likefoto", "album", "user", "editable", "liked", "likes"));
+    return view(
+      "foto.details",
+      compact("foto", "likefoto", "album", "user", "editable", "liked", "likes")
+    );
   }
 
   /**
@@ -139,7 +142,7 @@ class FotoController extends Controller
   public function destroy(string $id): RedirectResponse
   {
     if (!Auth::check()) {
-      return redirect()->route('login');
+      return redirect()->route("login");
     }
 
     $foto = Foto::find($id);
