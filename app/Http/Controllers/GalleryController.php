@@ -4,17 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Foto;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class GalleryController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(): View|RedirectResponse
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $albums = Album::all();
     $user = Auth::user();
 
@@ -24,16 +30,24 @@ class GalleryController extends Controller
   /**
    * Show the form for creating a new resource.
    */
-  public function create()
+  public function create(): View
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     return view("gallery.add");
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(Request $request): RedirectResponse
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $albumMessage = [
       "namaalbum.min" => "Masukkan minimal 1 karakter !",
       "deskripsi.min" => "Masukkan minimal 1 karakter !",
@@ -118,8 +132,12 @@ class GalleryController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(string $id)
+  public function edit(string $id): View
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $album = Album::find($id);
     $foto = $album->foto()->get();
 
@@ -141,8 +159,12 @@ class GalleryController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id)
+  public function update(Request $request, string $id): RedirectResponse
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $album = Album::find($id);
 
     $newData = $request->validate([
@@ -162,8 +184,12 @@ class GalleryController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
+  public function destroy(string $id): RedirectResponse
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $album = Album::find($id);
     $foto = [];
     foreach ($album->foto()->get() as $f) {

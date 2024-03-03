@@ -30,6 +30,10 @@ class LikeFotoController extends Controller
    */
   public function store(Request $request)
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $userID = Auth::id();
     $fotoID = $request->input("fotoid");
     $currentDate = date("Y-m-d");
@@ -78,6 +82,10 @@ class LikeFotoController extends Controller
    */
   public function destroy(string $id)
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $likefoto = LikeFoto::find($id);
     $foto = $likefoto->foto()->get()->first();
 

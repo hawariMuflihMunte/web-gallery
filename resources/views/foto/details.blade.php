@@ -82,6 +82,7 @@
                   class="text-xl duration-200 hover:text-red-400"
                 >
                   <i class="bi-heart"></i>
+                  <span>{{ $likes }}</span>
                 </button>
                 <a
                   href="#"
@@ -104,6 +105,7 @@
                   class="text-xl text-red-500 duration-200 hover:text-red-400"
                 >
                   <i class="bi-heart-fill"></i>
+                  <span>{{ $likes }}</span>
                 </button>
                 <a
                   href="#"

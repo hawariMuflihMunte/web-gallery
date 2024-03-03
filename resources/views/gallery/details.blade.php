@@ -101,6 +101,7 @@
               </button>
               <section
                 x-show="openDeleteConfirmation"
+                x-cloak
                 class="absolute right-0 top-[calc(100%+6px)] z-40 flex min-w-56 flex-col rounded-sm bg-slate-100 p-3 shadow-md"
                 @click.outside="openDeleteConfirmation = false"
               >

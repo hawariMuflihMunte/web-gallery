@@ -33,6 +33,10 @@ class FotoController extends Controller
    */
   public function store(Request $request)
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $foto = $request->validate([
       "judulfoto" => "required|min:1",
       "deskripsifoto" => "required|min:1",
@@ -94,8 +98,13 @@ class FotoController extends Controller
    */
   public function edit(string $id): View
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $foto = Foto::find($id);
-    $likefoto = $foto->likefoto()->get()->first();
+    $likefoto = $foto->likefoto()->get();
+    $likes = count($foto->likefoto()->get());
     $album = $foto->album()->get()->first();
     $user = $foto->user()->get()->first();
 
@@ -108,11 +117,12 @@ class FotoController extends Controller
       $editable = true;
     }
 
-    if (!empty($likefoto) && $likefoto["UserID"] == $currentUserID) {
+    if (count($likefoto) != 0 && $likefoto[0]["UserID"] == $currentUserID) {
+      $likefoto = $likefoto[0];
       $liked = true;
     }
 
-    return view("foto.details", compact("foto", "likefoto", "album", "user", "editable", "liked"));
+    return view("foto.details", compact("foto", "likefoto", "album", "user", "editable", "liked", "likes"));
   }
 
   /**
@@ -128,6 +138,10 @@ class FotoController extends Controller
    */
   public function destroy(string $id): RedirectResponse
   {
+    if (!Auth::check()) {
+      return redirect()->route('login');
+    }
+
     $foto = Foto::find($id);
     $album = $foto->album()->get()->first();
     $splitStr = explode("/", $foto["LokasiFile"]);
