@@ -6,7 +6,7 @@
   }"
 >
   <a
-    href="{{ url()->current() }}"
+    href="{{ route("gallery.index") }}"
     class="flex rounded-sm border border-slate-400 shadow-lg"
   >
     <img
@@ -57,6 +57,7 @@
   <section
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 p-8"
     x-show="logoutConfirm"
+    x-cloak
   >
     <article
       class="glass_morphism_bg md:1/2 w-full rounded-sm px-8 py-10"

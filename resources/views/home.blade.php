@@ -39,15 +39,20 @@
             class="flex h-max cursor-pointer flex-col overflow-hidden rounded-sm border border-slate-400 bg-slate-200 font-bold text-slate-700"
             role="article"
             x-data="{
-              imageHovered: false,
+                imageHovered: false,
             }"
             x-on:mouseover="imageHovered = true"
             x-on:mouseleave="imageHovered = false"
           >
             <section class="w-full">
               <img
-                src="{{ url("/storage/" .$album->foto()->get()->first()["LokasiFile"],) }}"
-                alt="{{ $album->foto()->get()->first()["DeskripsiFoto"] }}"
+                @if (! empty($album->foto()->get()->first()))
+                    src="{{ url("/storage/" .$album->foto()->get()->first()["LokasiFile"],) }}"
+                    alt="{{ $album->foto()->get()->first()["DeskripsiFoto"] }}"
+                @else
+                    src="{{ asset("images/bg_no_image.png") }}"
+                    alt="Coffee Time. There are no images in this album"
+                @endif
                 class="h-auto w-full duration-200 ease-linear"
                 loading="lazy"
                 :class="imageHovered ? 'scale-100' : 'scale-95'"
@@ -73,7 +78,7 @@
             class="flex h-max cursor-pointer flex-col overflow-hidden rounded-sm border border-slate-400 bg-slate-200 font-bold text-slate-700"
             role="article"
             x-data="{
-              imageHovered: false,
+                imageHovered: false,
             }"
             x-on:mouseover="imageHovered = true"
             x-on:mouseleave="imageHovered = false"
@@ -99,15 +104,20 @@
               class="flex h-max cursor-pointer flex-col overflow-hidden rounded-sm border border-slate-400 bg-slate-200 font-bold text-slate-700"
               role="article"
               x-data="{
-                imageHovered: false,
+                  imageHovered: false,
               }"
               x-on:mouseover="imageHovered = true"
               x-on:mouseleave="imageHovered = false"
             >
               <section class="w-full">
                 <img
-                  src="{{ url("/storage/" .$album->foto()->get()->first()["LokasiFile"],) }}"
-                  alt="{{ $album->foto()->get()->first()["DeskripsiFoto"] }}"
+                  @if (! empty($album->foto()->get()->first()))
+                      src="{{ url("/storage/" .$album->foto()->get()->first()["LokasiFile"],) }}"
+                      alt="{{ $album->foto()->get()->first()["DeskripsiFoto"] }}"
+                  @else
+                      src="{{ asset("images/bg_no_image.png") }}"
+                      alt="Coffee Time. There are no images in this album"
+                  @endif
                   class="h-auto w-full duration-200 ease-linear"
                   loading="lazy"
                   :class="imageHovered ? 'scale-100' : 'scale-95'"

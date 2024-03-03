@@ -6,26 +6,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LikeFoto extends Model
 {
-    protected $table = 'likefoto';
-	protected $primaryKey = 'LikeID';
-	public $timestamps = false;
+  protected $table = "likefoto";
+  protected $primaryKey = "LikeID";
+  public $timestamps = false;
 
-	/**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-	    'TanggalLike'
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array<int, string>
+   */
+  protected $fillable = ["FotoID", "UserID", "TanggalLike"];
 
-    public function foto(): BelongsTo
-	{
-		return $this->belongsTo(Foto::class, 'FotoID');
-	}
+  public function foto(): BelongsTo
+  {
+    return $this->belongsTo(Foto::class, "FotoID");
+  }
 
-	public function user(): BelongsTo
-	{
-		return $this->belongsTo(User::class, 'UserID');
-	}
+  public function user(): BelongsTo
+  {
+    return $this->belongsTo(User::class, "UserID");
+  }
 }

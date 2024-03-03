@@ -175,7 +175,16 @@ class GalleryController extends Controller
       $path = join("\\", $splitStr);
 
       if (!Storage::disk("public")->has($path)) {
-        dd($foto, $f["LokasiFile"], 'File doesn\'t exist !');
+        // dd($foto, $f["LokasiFile"], 'Berkas tidak ditemukan !');
+
+        Album::destroy($id);
+
+        return redirect()
+          ->route("gallery.index")
+          ->with(
+            "destroy-success",
+            "Berkas yang ingin dihapus sudah tidak ada. Berhasil menghapus album !"
+          );
       }
 
       Storage::disk("public")->delete($path);

@@ -51,3 +51,7 @@
     -webkit-backdrop-filter: blur(14.5px);
   }
 }
+
+[x-cloak] {
+  display: none;
+}

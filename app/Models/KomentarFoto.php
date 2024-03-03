@@ -7,27 +7,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class KomentarFoto extends Model
 {
-    protected $table = 'komentarfoto';
-    protected $primaryKey = 'KomentarID';
-    public $timestamps = false;
+  protected $table = "komentarfoto";
+  protected $primaryKey = "KomentarID";
+  public $timestamps = false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'IsiKomentar',
-        'TanggalKomentar',
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array<int, string>
+   */
+  protected $fillable = ["IsiKomentar", "TanggalKomentar"];
 
-    public function foto(): BelongsTo
-    {
-        return $this->belongsTo(Foto::class, 'FotoID');
-    }
+  public function foto(): BelongsTo
+  {
+    return $this->belongsTo(Foto::class, "FotoID");
+  }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'UserID');
-    }
+  public function user(): BelongsTo
+  {
+    return $this->belongsTo(User::class, "UserID");
+  }
 }

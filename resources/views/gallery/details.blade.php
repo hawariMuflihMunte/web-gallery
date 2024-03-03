@@ -63,8 +63,8 @@
                   id="deskripsi"
                   class="min-h-20 min-w-full resize-none rounded-sm bg-white bg-opacity-95 p-2"
                 >
-{{ $album["Deskripsi"] }}</textarea
-                >
+{{ $album["Deskripsi"] }}
+                </textarea>
               </section>
               <button
                 type="submit"
@@ -129,11 +129,116 @@
       <section class="my-5 rounded-sm bg-slate-100 p-4">
         <h2>{{ $album["Deskripsi"] }}</h2>
       </section>
+      <section class="flex items-center justify-between bg-slate-100 p-4">
+        <h3>Gambar ({{ count($foto) }})</h3>
+        @if ($editable)
+          <section x-data="{
+            showAddImageForm: false,
+          }">
+            <a
+              href="#"
+              @click="showAddImageForm = !showAddImageForm"
+              class="flex min-w-10 items-center justify-center rounded-sm border border-slate-300 bg-white bg-opacity-95 p-2 outline-none"
+            >
+              <i class="bi-plus"></i>
+            </a>
+            {{-- Popups --}}
+            <section
+              class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 p-8"
+              x-show="showAddImageForm"
+              x-cloak
+            >
+              <article
+                class="glass_morphism_bg md:1/2 w-full rounded-sm px-8 py-10"
+                @click.outside="showAddImageForm = false"
+              >
+                <form
+                  action="{{ route("foto.store") }}"
+                  method="post"
+                  enctype="multipart/form-data"
+                  autocomplete="off"
+                  class="rounded-sm border border-slate-300 bg-slate-200 px-5 py-6 shadow-md"
+                >
+                  @csrf
+                  <input
+                    type="hidden"
+                    name="albumid"
+                    id="albumid"
+                    value="{{ $album["AlbumID"] }}"
+                  />
+                  <article
+                    class="z-20 flex h-max w-full items-stretch gap-3 border-b border-b-slate-400 bg-slate-100 px-2 py-6"
+                  >
+                    <label
+                      for="image"
+                      class="cursor-pointer"
+                    ></label>
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      accept="image/*"
+                      class="cursor-pointer file:hidden file:h-full file:w-full hover:underline"
+                    />
+                    <section class="flex flex-col gap-3 border-l border-l-slate-300 px-7">
+                      <section class="flex flex-col">
+                        <label for="judulfoto">Judul</label>
+                        <input
+                          type="text"
+                          name="judulfoto"
+                          id="judulfoto"
+                          class="rounded-sm border border-slate-300 bg-slate-50 px-2 py-1 outline-none"
+                        />
+                      </section>
+                      <section class="flex flex-col">
+                        <label for="deskripsifoto">Deskripsi</label>
+                        <textarea
+                          name="deskripsifoto"
+                          id="deskripsifoto"
+                          class="max-h-20 min-h-10 rounded-sm border border-slate-300 bg-slate-50 px-2 py-1 outline-none"
+                        ></textarea>
+                      </section>
+                    </section>
+                  </article>
+                  <button
+                    type="submit"
+                    class="flex w-full place-content-center place-items-center gap-4 bg-blue-300 p-2 duration-200 hover:bg-blue-400"
+                  >
+                    Tambah
+                  </button>
+                </form>
+              </article>
+            </section>
+            {{-- End of Popups --}}
+          </section>
+        @endif
+      </section>
       <section class="grid grid-cols-2 grid-rows-2 gap-4 bg-slate-100">
-        @foreach ($foto as $f)
+        @if (count($foto) > 0)
+          @foreach ($foto as $f)
+            <a
+              href="{{ route("foto.edit", $f) }}"
+              class="flex h-full w-full flex-col place-content-center place-items-center transition-all duration-200 hover:bg-slate-200"
+              x-data="{
+                hovered: false,
+              }"
+              @mouseover="hovered = true"
+              @mouseleave="hovered = false"
+            >
+              <img
+                src="{{ url("/storage/" . $f["LokasiFile"]) }}"
+                alt="{{ $f["JudulFoto"] }}"
+                loading="lazy"
+                class="block transition-all duration-200"
+                :class="hovered ? 'scale-100' : 'scale-90'"
+              />
+              <h3>{{ $f["JudulFoto"] }}</h3>
+            </a>
+          @endforeach
+        @else
           <a
-            href="#"
-            class="flex h-full w-full flex-col place-content-center place-items-center transition-all duration-200 hover:bg-slate-200"
+            href="{{ route("foto.show", ["foto" => $album["AlbumID"]]) }}"
+            class="flex h-full w-full flex-col place-content-center place-items-center bg-slate-200 transition-all duration-200"
             x-data="{
               hovered: false,
             }"
@@ -141,15 +246,15 @@
             @mouseleave="hovered = false"
           >
             <img
-              src="{{ url("/storage/" . $f["LokasiFile"]) }}"
-              alt="{{ $f["JudulFoto"] }}"
+              src="{{ asset("images/bg_add_image.png") }}"
+              alt="No photos. Click to add"
               loading="lazy"
               class="block transition-all duration-200"
               :class="hovered ? 'scale-100' : 'scale-90'"
             />
-            <h3>{{ $f["JudulFoto"] }}</h3>
+            <h3>Add Photo</h3>
           </a>
-        @endforeach
+        @endif
       </section>
     </section>
   </main>

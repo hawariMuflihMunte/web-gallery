@@ -84,7 +84,7 @@
           </section>
           <section
             role="group"
-            class="max-h-32 overflow-y-scroll py-1"
+            class="z-30 flex max-h-[500px] flex-col overflow-y-scroll bg-slate-50 p-4 shadow-[inset_0_0px_4px_rgba(0,0,0,0.6)]"
           >
             @if (count($errors) > 0)
               <div class="alert alert-danger">
@@ -97,10 +97,12 @@
             @endif
 
             <template x-for="count in imageCount">
-              <article class="flex h-max w-full items-center gap-3 bg-slate-300 px-1 py-3">
+              <article
+                class="z-20 flex h-max w-full items-stretch gap-3 border-b border-b-slate-400 bg-slate-200 px-2 py-6"
+              >
                 <label
                   :for="count"
-                  x-text="count"
+                  x-text="`${count})`"
                   class="cursor-pointer"
                 ></label>
                 <input
@@ -109,26 +111,25 @@
                   :id="count"
                   accept="image/*"
                   @change="fileChosen"
-                  class="cursor-pointer file:hidden"
+                  class="cursor-pointer file:hidden file:h-full file:w-full hover:underline"
                 />
-                <section class="flex flex-col gap-3">
+                <section class="flex flex-col gap-3 border-l border-l-slate-300 px-7">
                   <section class="flex flex-col">
-                    <label for="judulfoto">Judul</label>
+                    <label :for="count + '-judulfoto'">Judul</label>
                     <input
                       type="text"
                       name="judulfoto[]"
-                      id="judulfoto"
-                      class="rounded-sm border border-slate-300 bg-slate-200 px-2 py-1 outline-none"
+                      :id="count + '-judulfoto'"
+                      class="rounded-sm border border-slate-300 bg-slate-50 px-2 py-1 outline-none"
                     />
                   </section>
                   <section class="flex flex-col">
-                    <label for="deskripsifoto">Deskripsi</label>
-                    <input
-                      type="text"
+                    <label :for="count + '-deskripsifoto'">Deskripsi</label>
+                    <textarea
                       name="deskripsifoto[]"
-                      id="deskripsifoto"
-                      class="rounded-sm border border-slate-300 bg-slate-200 px-2 py-1 outline-none"
-                    />
+                      :id="count + '-deskripsifoto'"
+                      class="max-h-20 min-h-10 rounded-sm border border-slate-300 bg-slate-50 px-2 py-1 outline-none"
+                    ></textarea>
                   </section>
                 </section>
               </article>
@@ -136,11 +137,18 @@
           </section>
           <button
             type="submit"
-            class="glass_morphism_navy_bg flex w-full items-center justify-center gap-2 rounded-sm py-2"
+            class="flex w-full place-content-center place-items-center gap-4 bg-blue-300 p-2 duration-200 hover:bg-blue-400"
           >
             Tambah
             <i class="bi-floppy2-fill"></i>
           </button>
+          <a
+            href="{{ route("gallery.index") }}"
+            class="flex w-full place-content-center place-items-center gap-4 bg-slate-300 p-2 duration-200 hover:bg-slate-400"
+          >
+            Batal
+            <i class="bi-x-square"></i>
+          </a>
         </form>
       </section>
     </section>

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\FotoController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\LikeFotoController;
 use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,11 +25,12 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-
 Route::group([
     'middleware' => 'auth',
 ], function () {
     Route::get('/');
     Route::resource('/gallery', GalleryController::class);
+    Route::resource('/foto', FotoController::class);
+    Route::resource('/likefoto', LikeFotoController::class);
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
