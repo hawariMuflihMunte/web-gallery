@@ -28,7 +28,9 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::group([
     'middleware' => 'auth',
 ], function () {
-    Route::get('/');
+    Route::get('/', function () {
+        return redirect()->route('gallery.index');
+    });
     Route::resource('/gallery', GalleryController::class);
     Route::resource('/foto', FotoController::class);
     Route::resource('/likefoto', LikeFotoController::class);
