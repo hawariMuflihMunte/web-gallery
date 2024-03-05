@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\FotoController;
-use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\LikeFotoController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\KomentarFotoController;
+use App\Http\Controllers\Gallery\FotoController;
+use App\Http\Controllers\Gallery\GalleryController;
+use App\Http\Controllers\Gallery\LikeFotoController;
+use App\Http\Controllers\Gallery\KomentarFotoController;
 use Illuminate\Support\Facades\Route;
 
 /*
