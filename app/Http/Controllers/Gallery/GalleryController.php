@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Gallery;
 
+use App\Http\Controllers\Controller;
 use App\Models\Album;
 use App\Models\Foto;
 use Illuminate\Http\RedirectResponse;
@@ -12,7 +13,7 @@ use Illuminate\View\View;
 
 class GalleryController extends Controller
 {
-  public function __construct()
+    public function __construct()
   {
     $this->middleware("auth");
   }
