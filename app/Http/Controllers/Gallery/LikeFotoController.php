@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Gallery;
 
+use App\Http\Controllers\Controller;
 use App\Models\Foto;
 use App\Models\LikeFoto;
 use Illuminate\Http\Request;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LikeFotoController extends Controller
 {
-  public function __construct()
+    public function __construct()
   {
     $this->middleware("auth");
   }
@@ -85,8 +86,6 @@ class LikeFotoController extends Controller
   {
     $likefoto = LikeFoto::find($id);
     $foto = $likefoto->foto()->get()->first();
-
-    // dd($likefoto, $foto);
 
     LikeFoto::destroy($id);
 
