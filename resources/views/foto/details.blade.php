@@ -93,7 +93,7 @@
               </form>
             @else
               <form
-                action="{{ route("likefoto.destroy", ["likefoto" => $likefoto]) }}"
+                action="{{ route("likefoto.destroy", ["likefoto" => $likefoto["LikeID"]]) }}"
                 method="post"
                 role="group"
                 class="flex gap-4"

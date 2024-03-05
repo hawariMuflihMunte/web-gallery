@@ -117,10 +117,23 @@ class FotoController extends Controller
       $editable = true;
     }
 
-    if (count($likefoto) != 0 && $likefoto[0]["UserID"] == $currentUserID) {
-      $likefoto = $likefoto[0];
-      $liked = true;
+    $likefotoArray = $likefoto->toArray();
+    foreach ($likefotoArray as $like) {
+      if (in_array($currentUserID, $like)) {
+        $liked = true;
+        $likefoto = $like;
+        break;
+      }
     }
+
+    // dd($likefoto->toArray(), $currentUserID, $liked);
+
+    // if (count($likefoto) != 0 && $likefoto[0]["UserID"] == $currentUserID) {
+    //   $likefoto = $likefoto[0];
+    //   $liked = true;
+    // }
+
+    // dd($likefotoArray, $likefoto);
 
     return view(
       "foto.details",
