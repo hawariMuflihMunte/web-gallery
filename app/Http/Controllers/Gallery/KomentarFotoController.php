@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Gallery;
 
+use App\Http\Controllers\Controller;
 use App\Models\KomentarFoto;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class KomentarFotoController extends Controller
 {
-  public function __construct()
+    public function __construct()
   {
     $this->middleware("auth");
   }
@@ -31,7 +33,7 @@ class KomentarFotoController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(Request $request): RedirectResponse
   {
     $commentMessage = [
       "isikomentar.required" => "Komentar tidak boleh kosong !",
