@@ -16,7 +16,7 @@ class KomentarFoto extends Model
    *
    * @var array<int, string>
    */
-  protected $fillable = ["IsiKomentar", "TanggalKomentar"];
+  protected $fillable = ["FotoID", "UserID", "IsiKomentar", "TanggalKomentar"];
 
   public function foto(): BelongsTo
   {

@@ -12,15 +12,16 @@ use Illuminate\View\View;
 
 class GalleryController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
   /**
    * Display a listing of the resource.
    */
   public function index(): View|RedirectResponse
   {
-    if (!Auth::check()) {
-      return redirect()->route("login");
-    }
-
     $albums = Album::all();
     $user = Auth::user();
 
@@ -32,10 +33,6 @@ class GalleryController extends Controller
    */
   public function create(): View
   {
-    if (!Auth::check()) {
-      return redirect()->route("login");
-    }
-
     return view("gallery.add");
   }
 
@@ -44,10 +41,6 @@ class GalleryController extends Controller
    */
   public function store(Request $request): RedirectResponse
   {
-    if (!Auth::check()) {
-      return redirect()->route("login");
-    }
-
     $albumMessage = [
       "namaalbum.min" => "Masukkan minimal 1 karakter !",
       "deskripsi.min" => "Masukkan minimal 1 karakter !",
@@ -134,10 +127,6 @@ class GalleryController extends Controller
    */
   public function edit(string $id): View
   {
-    if (!Auth::check()) {
-      return redirect()->route("login");
-    }
-
     $album = Album::find($id);
     $foto = $album->foto()->get();
 
@@ -161,10 +150,6 @@ class GalleryController extends Controller
    */
   public function update(Request $request, string $id): RedirectResponse
   {
-    if (!Auth::check()) {
-      return redirect()->route("login");
-    }
-
     $album = Album::find($id);
 
     $newData = $request->validate([
@@ -186,10 +171,6 @@ class GalleryController extends Controller
    */
   public function destroy(string $id): RedirectResponse
   {
-    if (!Auth::check()) {
-      return redirect()->route("login");
-    }
-
     $album = Album::find($id);
     $foto = [];
     foreach ($album->foto()->get() as $f) {

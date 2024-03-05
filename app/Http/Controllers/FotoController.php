@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Storage;
 
 class FotoController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
   /**
    * Display a listing of the resource.
    */
@@ -33,10 +38,6 @@ class FotoController extends Controller
    */
   public function store(Request $request)
   {
-    if (!Auth::check()) {
-      return redirect()->route("login");
-    }
-
     $foto = $request->validate([
       "judulfoto" => "required|min:1",
       "deskripsifoto" => "required|min:1",
@@ -98,12 +99,10 @@ class FotoController extends Controller
    */
   public function edit(string $id): View
   {
-    if (!Auth::check()) {
-      return redirect()->route("login");
-    }
-
     $foto = Foto::find($id);
     $likefoto = $foto->likefoto()->get();
+    $komentarfoto = $foto->komentarfoto()->get();
+    $commentcount = count($komentarfoto);
     $likes = count($foto->likefoto()->get());
     $album = $foto->album()->get()->first();
     $user = $foto->user()->get()->first();
@@ -126,18 +125,9 @@ class FotoController extends Controller
       }
     }
 
-    // dd($likefoto->toArray(), $currentUserID, $liked);
-
-    // if (count($likefoto) != 0 && $likefoto[0]["UserID"] == $currentUserID) {
-    //   $likefoto = $likefoto[0];
-    //   $liked = true;
-    // }
-
-    // dd($likefotoArray, $likefoto);
-
     return view(
       "foto.details",
-      compact("foto", "likefoto", "album", "user", "editable", "liked", "likes")
+      compact("foto", "likefoto", "album", "user", "editable", "liked", "likes", "commentcount", "komentarfoto")
     );
   }
 
@@ -154,10 +144,6 @@ class FotoController extends Controller
    */
   public function destroy(string $id): RedirectResponse
   {
-    if (!Auth::check()) {
-      return redirect()->route("login");
-    }
-
     $foto = Foto::find($id);
     $album = $foto->album()->get()->first();
     $splitStr = explode("/", $foto["LokasiFile"]);

@@ -7,8 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-use function PHPUnit\Framework\isEmpty;
-
 class RegisterController extends Controller
 {
   public function index()

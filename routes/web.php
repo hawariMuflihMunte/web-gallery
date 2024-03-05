@@ -6,6 +6,7 @@ use App\Http\Controllers\FotoController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LikeFotoController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\KomentarFotoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,5 +35,6 @@ Route::group([
     Route::resource('/gallery', GalleryController::class);
     Route::resource('/foto', FotoController::class);
     Route::resource('/likefoto', LikeFotoController::class);
+    Route::resource('/komentarfoto', KomentarFotoController::class);
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
