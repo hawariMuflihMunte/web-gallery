@@ -14,7 +14,7 @@ class FotoController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth');
+    $this->middleware("auth");
   }
 
   /**
@@ -127,7 +127,17 @@ class FotoController extends Controller
 
     return view(
       "foto.details",
-      compact("foto", "likefoto", "album", "user", "editable", "liked", "likes", "commentcount", "komentarfoto")
+      compact(
+        "foto",
+        "likefoto",
+        "album",
+        "user",
+        "editable",
+        "liked",
+        "likes",
+        "commentcount",
+        "komentarfoto"
+      )
     );
   }
 

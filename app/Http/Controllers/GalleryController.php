@@ -14,7 +14,7 @@ class GalleryController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth');
+    $this->middleware("auth");
   }
 
   /**
@@ -96,8 +96,6 @@ class GalleryController extends Controller
       $filepath = $request
         ->file("images")
         [$i]->storeAs($filterAlbum, $filenameWithExtension, "public");
-
-      // dd($filename, $filenameWithoutExtension, $filenameWithExtension, $filepath);
 
       Foto::create([
         "JudulFoto" => $foto["judulfoto"][$i],
