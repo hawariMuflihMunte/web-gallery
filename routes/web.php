@@ -7,6 +7,7 @@ use App\Http\Controllers\Gallery\FotoController;
 use App\Http\Controllers\Gallery\GalleryController;
 use App\Http\Controllers\Gallery\LikeFotoController;
 use App\Http\Controllers\Gallery\KomentarFotoController;
+use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,5 +37,6 @@ Route::group([
     Route::resource('/foto', FotoController::class);
     Route::resource('/likefoto', LikeFotoController::class);
     Route::resource('/komentarfoto', KomentarFotoController::class);
+    Route::resource('/profile', ProfileController::class);
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
