@@ -1,6 +1,7 @@
 {
   "tabWidth": 2,
   "trailingCommaPHP": true,
+  "trailingComma": "all",
   "semi": true,
   "bracketSpacing": true,
   "bracketSameLine": false,

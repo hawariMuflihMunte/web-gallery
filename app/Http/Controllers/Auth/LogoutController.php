@@ -10,15 +10,15 @@ use Illuminate\View\View;
 
 class LogoutController extends Controller
 {
-  public function logout(): View|RedirectResponse
-  {
-    if (!Auth::check()) {
-      return view("auth.login");
+    public function logout(): View|RedirectResponse
+    {
+        if (!Auth::check()) {
+            return view("auth.login");
+        }
+
+        Auth::logout();
+        Session::invalidate();
+
+        return redirect()->route("login");
     }
-
-    Auth::logout();
-    Session::invalidate();
-
-    return redirect()->route("login");
-  }
 }

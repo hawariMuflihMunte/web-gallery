@@ -6,10 +6,10 @@
         "build": "vite build",
         "prettier:view:check": "prettier --check --ignore-path .gitignore resources/",
         "prettier:view:fix": "prettier --write --ignore-path .gitignore resources/",
-        "prettier:controller:check": "prettier --check --ignore-path .gitignore app/Http/Controllers",
-        "prettier:controller:fix": "prettier --write --ignore-path .gitignore app/Http/Controllers",
-        "prettier:model:check": "prettier --check --ignore-path .gitignore app/Models",
-        "prettier:model:fix": "prettier --write --ignore-path .gitignore app/Models"
+        "prettier:controller:check": "prettier --check --ignore-path .gitignore app/Http/Controllers --tab-width 4 --print-width 80",
+        "prettier:controller:fix": "prettier --write --ignore-path .gitignore app/Http/Controllers --tab-width 4 --print-width 80",
+        "prettier:model:check": "prettier --check --ignore-path .gitignore app/Models --tab-width 4 --print-width 80",
+        "prettier:model:fix": "prettier --write --ignore-path .gitignore app/Models --tab-width 4 --print-width 80"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.22.2",
