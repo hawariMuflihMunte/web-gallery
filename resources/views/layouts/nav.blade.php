@@ -31,7 +31,7 @@
           <ul class="flex flex-col gap-4">
             <li>
               <a
-                href="{{ route('profile.index') }}"
+                href="{{ route("profile.index") }}"
                 class="flex items-center gap-2 bg-inherit px-5 py-2 text-slate-800 transition-all duration-100 hover:opacity-60 hover:brightness-125"
               >
                 <i class="bi-person-circle"></i>
