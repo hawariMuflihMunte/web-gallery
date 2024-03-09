@@ -43,6 +43,6 @@ class LoginController extends Controller
         ->with("success-login", "Selamat datang {$credentials["username"]} !");
     }
 
-    return redirect()->back()->with("error-login", "Akun tidak ditemukan. Coba lagi")->withInput();
+    return redirect()->back()->with("error-login", "Akun tidak ditemukan. Coba lagi !");
   }
 }

@@ -13,7 +13,7 @@ use Illuminate\View\View;
 
 class FotoController extends Controller
 {
-    public function __construct()
+  public function __construct()
   {
     $this->middleware("auth");
   }
