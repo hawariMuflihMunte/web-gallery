@@ -30,7 +30,7 @@
                   type="password"
                 ></x-forms.input>
               </section>
-              <x-button>
+              <x-button buttonType="submit">
                 <i class="bi bi-box-arrow-in-right"></i>
                 &nbsp;&nbsp;Login
               </x-button>
