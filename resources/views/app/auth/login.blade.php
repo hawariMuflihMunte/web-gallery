@@ -14,22 +14,37 @@
             method="post"
           >
             @csrf
-            <section class="flex flex-col gap-8 mt-4 font-barlow">
+            <section class="mt-4 flex flex-col gap-8 font-barlow">
               <section class="flex flex-col">
                 <label for="username">Username</label>
-                <x-forms.input id="username" name="username"></x-forms.input>
+                <x-forms.input
+                  id="username"
+                  name="username"
+                ></x-forms.input>
               </section>
               <section class="flex flex-col">
                 <label for="password">Password</label>
-                <x-forms.input id="password" name="password" type="password"></x-forms.input>
+                <x-forms.input
+                  id="password"
+                  name="password"
+                  type="password"
+                ></x-forms.input>
               </section>
               <x-button>
                 <i class="bi bi-box-arrow-in-right"></i>
                 &nbsp;&nbsp;Login
               </x-button>
               <section>
-                <hr class="rounded-md border border-emerald-400">
-                <p>No account ? <a href="{{ route('register') }}" class="text-emerald-700 hover:text-emerald-600">Signup</a></p>
+                <hr class="rounded-md border border-emerald-400" />
+                <p>
+                  No account ?
+                  <a
+                    href="{{ route("register") }}"
+                    class="text-emerald-700 hover:text-emerald-600"
+                  >
+                    Signup
+                  </a>
+                </p>
               </section>
             </section>
           </form>
