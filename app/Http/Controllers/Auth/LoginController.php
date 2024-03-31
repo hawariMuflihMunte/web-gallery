@@ -14,7 +14,7 @@ class LoginController extends Controller
     public function index(): View|RedirectResponse
     {
         if (!Auth::check()) {
-            return view("auth.login");
+            return view("app.auth.login");
         }
 
         return redirect()->route("gallery.index");
