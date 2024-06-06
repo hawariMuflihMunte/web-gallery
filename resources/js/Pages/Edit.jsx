@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { router } from '@inertiajs/react';
+import React, { useState } from "react";
+import { router } from "@inertiajs/react";
 
 export default function Edit({ post }) {
   const [values, setValues] = useState({
@@ -11,7 +11,7 @@ export default function Edit({ post }) {
     const key = e.target.id;
     const value = e.target.value;
 
-    setValues(values => ({
+    setValues((values) => ({
       ...values,
       [key]: value,
     }));
@@ -25,12 +25,20 @@ export default function Edit({ post }) {
   return (
     <>
       <h1>Edit Post</h1>
-      <hr/>
+      <hr />
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label>
-        <input id="title" value={values.title} onChange={handleChange} />
+        <input
+          id="title"
+          value={values.title}
+          onChange={handleChange}
+        />
         <label htmlFor="body">Body:</label>
-        <textarea id="body" value={values.body} onChange={handleChange} />
+        <textarea
+          id="body"
+          value={values.body}
+          onChange={handleChange}
+        />
         <button type="submit">Submit</button>
       </form>
     </>
