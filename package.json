@@ -22,5 +22,12 @@
         "prettier-plugin-tailwindcss": "^0.5.11",
         "tailwindcss": "^3.4.1",
         "vite": "^5.0.0"
+    },
+    "dependencies": {
+        "@inertiajs/inertia-react": "^0.8.1",
+        "@inertiajs/react": "^1.1.0",
+        "@vitejs/plugin-react": "^4.3.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
     }
 }
