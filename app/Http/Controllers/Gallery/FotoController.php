@@ -133,7 +133,7 @@ class FotoController extends Controller
         }
 
         return view(
-            "foto.details",
+            "app.foto.details",
             compact(
                 "foto",
                 "likefoto",
