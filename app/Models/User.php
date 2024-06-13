@@ -40,7 +40,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        "password" => "hashed",
+        "Password" => "hashed",
     ];
 
     public function album(): HasMany
