@@ -12,12 +12,7 @@ class Album extends Model
     protected $primaryKey = "AlbumID";
     public $timestamps = false;
 
-    /**
-     * The attributes that are mass assignable
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = ["NamaAlbum", "Deskripsi", "TanggalDibuat", "UserID"];
+    protected $guarded = ['AlbumID'];
 
     public function foto(): HasMany
     {

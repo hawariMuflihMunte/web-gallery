@@ -12,19 +12,7 @@ class Foto extends Model
     protected $primaryKey = "FotoID";
     public $timestamps = false;
 
-    /**
-     * The attributes that are mass assignable
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        "JudulFoto",
-        "DeskripsiFoto",
-        "TanggalUnggah",
-        "LokasiFile",
-        "AlbumID",
-        "UserID",
-    ];
+    protected $guarded = ['FotoID'];
 
     public function album(): BelongsTo
     {

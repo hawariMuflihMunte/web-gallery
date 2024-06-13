@@ -26,7 +26,7 @@ class GalleryController extends Controller
         $albums = Album::all();
         $user = Auth::user();
 
-        return view("home", compact("albums", "user"));
+        return view("app.gallery.index", compact("albums", "user"));
     }
 
     /**
@@ -150,7 +150,7 @@ class GalleryController extends Controller
             $editable = false;
         }
 
-        return view("gallery.details", compact("album", "foto", "editable"));
+        return view("app.gallery.details", compact("album", "foto", "editable"));
     }
 
     /**
