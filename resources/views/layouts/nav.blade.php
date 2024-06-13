@@ -1,5 +1,5 @@
 <nav
-  class="fixed z-50 flex min-h-10 w-full items-center justify-between border-b-2 border-b-slate-300 bg-blue-100 px-5 py-3 text-gray-700"
+  class="fixed z-50 flex min-h-10 w-full items-center justify-between bg-emerald-200 px-5 py-3 text-gray-700 shadow"
   x-data="{
     openList: false,
     logoutConfirm: false,
@@ -17,7 +17,7 @@
   <section class="flex">
     <button
       type="button"
-      class="glass_morphism_bg border border-slate-300 px-3 py-1 text-lg outline-none transition duration-100 hover:opacity-80"
+      class="bg-white px-3 py-1 text-lg outline-none transition duration-100 hover:opacity-80 rounded-sm"
       @click="openList = !openList"
       @click.outside="openList = false"
     >
@@ -26,26 +26,26 @@
     <template x-if="openList">
       <section class="relative">
         <section
-          class="glass_morphism_bg absolute right-0 top-full border-slate-300 py-2 shadow-md"
+          class="bg-white absolute right-0 top-full border-slate-300 shadow rounded-sm"
         >
-          <ul class="flex flex-col gap-4">
+          <ul class="flex flex-col">
             <li>
               <a
                 href="{{ route("profile.index") }}"
-                class="flex items-center gap-2 bg-inherit px-5 py-2 text-slate-800 transition-all duration-100 hover:opacity-60 hover:brightness-125"
+                class="flex items-center gap-2 bg-inherit p-3 text-slate-800 transition-all duration-100 hover:bg-emerald-400"
               >
                 <i class="bi-person-circle"></i>
-                Profil
+                <span class="ps-3">Profil</span>
               </a>
             </li>
             <li>
               <button
                 type="button"
-                class="flex items-center gap-2 bg-red-500 px-5 py-2 text-white transition-all duration-100 hover:bg-red-400"
+                class="flex items-center gap-2 p-3 transition-all duration-100 hover:bg-red-500 hover:text-white"
                 @click="logoutConfirm = true"
               >
                 <i class="bi-x-square"></i>
-                Keluar
+                <span class="ps-3">Keluar</span>
               </button>
             </li>
           </ul>
