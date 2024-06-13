@@ -150,7 +150,7 @@ class GalleryController extends Controller
             $editable = false;
         }
 
-        return view("gallery.details", compact("album", "foto", "editable"));
+        return view("app.gallery.details", compact("album", "foto", "editable"));
     }
 
     /**
