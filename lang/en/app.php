@@ -21,5 +21,6 @@ return [
   'cancel' => 'Cancel',
   'users' => 'Users',
   'user' => 'User',
-  'profile' => 'Profile'
+  'profile' => 'Profile',
+  'confirm_logout' => 'Are you sure you want to log out ?',
 ];
