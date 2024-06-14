@@ -12,11 +12,11 @@
         @csrf
         @method("put")
         <section>
-            <h1 class="text-2xl font-semibold">Edit Album</h1>
+            <h1 class="text-2xl font-semibold">@lang('app.edit_album')</h1>
             <hr class="mt-3 border-slate-500" />
         </section>
         <section class="flex flex-col">
-            <label for="namaalbum">Nama Album</label>
+            <label for="namaalbum">@lang('app.album_name')</label>
             <input
                 type="text"
                 name="namaalbum"
@@ -26,7 +26,7 @@
             />
         </section>
         <section class="flex flex-col">
-            <label for="deskripsi">Deskripsi</label>
+            <label for="deskripsi">@lang('app.description')</label>
             <textarea
                 name="deskripsi"
                 id="deskripsi"
@@ -75,14 +75,14 @@
             class="absolute right-0 top-[calc(100%+6px)] z-40 flex min-w-56 flex-col rounded-sm bg-slate-100 p-3 shadow-md"
             @click.outside="openDeleteConfirmation = false"
         >
-            <p>Yakin ingin menghapus album ini ?</p>
+            <p>@lang('app.delete_album_confirmation')</p>
             <br />
             <button
                 type="submit"
                 class="flex justify-between rounded-sm bg-red-400 px-4 py-2 duration-200 hover:bg-red-500 hover:text-slate-50"
             >
                 <i class="bi-check-square"></i>
-                Ya
+                @lang('app.yes')
             </button>
             <button
                 type="button"
@@ -90,7 +90,7 @@
                 @click="openDeleteConfirmation = false"
             >
                 <i class="bi-x-square"></i>
-                Tidak
+                @lang('app.no')
             </button>
         </section>
     </form>

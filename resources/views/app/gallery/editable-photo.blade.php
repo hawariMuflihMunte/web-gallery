@@ -52,7 +52,7 @@
                         class="flex flex-col gap-3 border-l border-l-slate-300 px-7"
                     >
                         <section class="flex flex-col">
-                            <label for="judulfoto">Judul</label>
+                            <label for="judulfoto">@lang('app.title')</label>
                             <input
                                 type="text"
                                 name="judulfoto"
@@ -62,7 +62,7 @@
                         </section>
                         <section class="flex flex-col">
                             <label for="deskripsifoto">
-                                Deskripsi
+                                @lang('app.description')
                             </label>
                             <textarea
                                 name="deskripsifoto"
@@ -76,7 +76,7 @@
                     type="submit"
                     class="flex w-full place-content-center place-items-center gap-4 bg-blue-300 p-2 duration-200 hover:bg-blue-400"
                 >
-                    Tambah
+                    @lang('app.add_image')
                 </button>
             </form>
         </article>

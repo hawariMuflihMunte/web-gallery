@@ -36,11 +36,11 @@
                     @endif
                 </section>
                 <section class="rounded-sm bg-slate-100 p-4">
-                    <h2>Deskripsi</h2>
+                    <h2>@lang('app.description')</h2>
                     <p>{{ $album["Deskripsi"] }}</p>
                 </section>
                 <section class="flex items-center justify-between bg-slate-100 p-4">
-                    <h3>Gambar ({{ count($foto) }})</h3>
+                    <h3>@lang('app.images') ({{ count($foto) }})</h3>
                     @if ($editable)
                         @include('app.gallery.editable-photo')
                     @endif

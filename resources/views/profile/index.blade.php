@@ -10,7 +10,7 @@
             class="mx-auto flex h-max max-w-[92%] flex-col gap-4 px-5 py-3 md:max-w-[80%]"
         >
             <section class="mt-5">
-                <h1 class="text-2xl">Profil Saya</h1>
+                <h1 class="text-2xl">@lang('app.my_profile')</h1>
                 <hr class="mt-2 border-slate-500" />
             </section>
             <form
@@ -94,7 +94,7 @@
 
                 <section class="flex flex-col">
                     <label for="username">
-                        Username
+                        @lang('app.username')
                         <span class="text-red-500">*</span>
                     </label>
                     <section class="flex w-full">
@@ -125,7 +125,7 @@
                 </section>
                 <section class="flex flex-col">
                     <label for="email">
-                        Email
+                        @lang('app.email')
                         <span class="text-red-500">*</span>
                     </label>
                     <section class="flex w-full">
@@ -156,7 +156,7 @@
                 </section>
                 <section class="flex flex-col">
                     <label for="namalengkap">
-                        Nama Lengkap
+                        @lang('app.full_name')
                         <span class="text-red-500">*</span>
                     </label>
                     <section class="flex w-full">
@@ -187,7 +187,7 @@
                 </section>
                 <section class="flex flex-col">
                     <section class="mb-3 flex w-full items-center justify-between">
-                        <label for="alamat">Alamat</label>
+                        <label for="alamat">@lang('app.address')</label>
                         <button
                             type="button"
                             class="bg-slate-300 px-2 py-1"
@@ -238,14 +238,14 @@
             >
                 @csrf
                 @method("DELETE")
-                <label for="delete">Hapus Akun</label>
+                <label for="delete">@lang('app.account_delete')</label>
                 <button
                     type="button"
                     id="delete"
                     class="bg-red-200 px-2 py-3"
                     @click="confirmDelete = !confirmDelete"
                 >
-                    Hapus
+                    @lang('app.delete')
                 </button>
                 {{-- Popup --}}
                 <section
@@ -257,27 +257,24 @@
                         class="glass_morphism_bg md:1/2 w-full rounded-sm px-8 py-10"
                         @click.outside="confirmDelete = false"
                     >
-                        <h3 class="text-2xl">Yakin ingin hapus akun ?</h3>
+                        <h3 class="text-2xl">@lang('app.account_delete_confirm')</h3>
                         <hr class="my-2 border-gray-700" />
                         <section class="my-6">
-                            <p>
-                                Data akun kamu akan dihapus beserta dengan data album dan
-                                foto !
-                            </p>
+                            <p>@lang('app.account_delete_warning')</p>
                         </section>
                         <section class="flex gap-6">
                             <button
                                 type="submit"
                                 class="glass_morphism_red_bg rounded-md px-3 py-1"
                             >
-                                Ya
+                                @lang('app.yes')
                             </button>
                             <button
                                 type="button"
                                 class="glass_morphism_navy_bg rounded-md px-3 py-1"
                                 @click="confirmDelete = false"
                             >
-                                Batal
+                                @lang('app.no')
                             </button>
                         </section>
                     </article>
