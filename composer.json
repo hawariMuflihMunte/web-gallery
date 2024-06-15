@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "piperbelly/web_gallery",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Modern simple gallery web",
+    "keywords": ["laravel", "framework", "web", "gallery"],
     "license": "MIT",
     "require": {
         "php": "^8.1",
