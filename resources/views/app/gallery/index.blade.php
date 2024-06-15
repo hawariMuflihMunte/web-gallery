@@ -61,13 +61,6 @@
                 @endforeach
             </section>
 
-            <input
-                type="file"
-                class="filepond"
-                name="filepond"
-                multiple
-                data-allow-reorder="true"
-            />
             <section class="mt-40">
                 <h1 class="mb-12 text-2xl font-semibold">@lang("app.your_album")</h1>
                 <section
