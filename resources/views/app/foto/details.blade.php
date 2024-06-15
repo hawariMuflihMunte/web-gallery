@@ -151,16 +151,10 @@
                                         @error("isikomentar")
                                             {{ $message }}
                                         @enderror
-
                                         <input
                                             type="hidden"
                                             name="fotoid"
                                             value="{{ $foto["FotoID"] }}"
-                                        />
-                                        <input
-                                            type="hidden"
-                                            name="userid"
-                                            value="{{ $foto["UserID"] }}"
                                         />
                                         <section class="flex flex-col">
                                             <textarea
