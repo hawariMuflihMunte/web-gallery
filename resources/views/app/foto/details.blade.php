@@ -14,15 +14,14 @@
             }"
         >
             <section class="flex flex-col gap-4 px-5 py-3">
-
                 <section class="flex items-center justify-between">
                     <h1 class="text-2xl font-semibold">{{ $foto["JudulFoto"] }}</h1>
                     @if ($editable)
-                        @include('app.foto.editable-photo')
+                        @include("app.foto.editable-photo")
                     @endif
                 </section>
                 <section class="flex w-full bg-slate-200">
-                    <section class="flex flex-col w-full">
+                    <section class="flex w-full flex-col">
                         <img
                             src="{{ url("/storage/" . $foto["LokasiFile"]) }}"
                             alt="{{ $foto["DeskripsiFoto"] }}"
@@ -86,13 +85,16 @@
                                 </form>
                             @endif
                             <h3
-                                class="text-sm cursor-default text-slate-500 hover:text-slate-600"
+                                class="cursor-default text-sm text-slate-500 hover:text-slate-600"
                             >
                                 {{ date("d F Y", strtotime($foto["TanggalUnggah"])) }}
                             </h3>
                         </section>
                         <section class="flex flex-col px-4 py-8">
-                            <h4>@lang('app.description'):</h4>
+                            <h4>
+                                @lang("app.description")
+                                :
+                            </h4>
                             <p>{{ $foto["DeskripsiFoto"] }}</p>
                         </section>
                         <hr
