@@ -9,7 +9,11 @@
         @yield("additional-head-props")
         @show
 
-        @vite("resources/css/app.css")
+        @vite([
+            "resources/css/app.css",
+            "resources/js/filepond.js",
+        ])
+
         @include("layouts.meta")
         @include("layouts.links")
         @include("layouts.scripts-defer")

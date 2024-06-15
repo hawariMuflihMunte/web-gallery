@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/bootstrap-icons.css',
                 'resources/js/app.jsx',
+                'resources/js/filepond.js',
             ],
             refresh: true,
         }),
