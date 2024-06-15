@@ -3,6 +3,9 @@
     <head>
         <title>@yield("title")</title>
 
+        {{-- See `config/google-fonts.php` for details --}}
+        @googlefonts
+
         @yield("additional-head-props")
         @show
 
