@@ -13,9 +13,7 @@
             ></x-alert>
         @endsession
 
-        <section
-            class="mx-auto max-w-[96%] md:max-w-[90%] xl:max-w-[85%]"
-        >
+        <section class="mx-auto max-w-[96%] md:max-w-[90%] xl:max-w-[85%]">
             <section class="flex flex-col gap-3">
                 <section
                     class="flex items-center justify-between"
@@ -32,17 +30,20 @@
                         </p>
                     </section>
                     @if ($editable)
-                        @include('app.gallery.editable-album')
+                        @include("app.gallery.editable-album")
                     @endif
                 </section>
                 <section class="rounded-sm bg-slate-100 p-4">
-                    <h2>Deskripsi</h2>
+                    <h2>@lang("app.description")</h2>
                     <p>{{ $album["Deskripsi"] }}</p>
                 </section>
                 <section class="flex items-center justify-between bg-slate-100 p-4">
-                    <h3>Gambar ({{ count($foto) }})</h3>
+                    <h3>
+                        @lang("app.images")
+                        ({{ count($foto) }})
+                    </h3>
                     @if ($editable)
-                        @include('app.gallery.editable-photo')
+                        @include("app.gallery.editable-photo")
                     @endif
                 </section>
                 <section class="grid grid-cols-2 grid-rows-2 bg-slate-100">
@@ -52,17 +53,19 @@
                                 href="{{ route("foto.edit", $f) }}"
                                 class="flex h-full w-full flex-col place-content-center place-items-center transition-all duration-200 hover:bg-slate-200"
                             >
-                                <section class="w-full relative h-full overflow-hidden">
+                                <section class="relative h-full w-full overflow-hidden">
                                     <img
-                                        src="{{ url("/storage/" . $f["LokasiFile"]) }}"
+                                        src="{{ url($f["LokasiFile"]) }}"
                                         alt="{{ $f["JudulFoto"] }}"
                                         loading="lazy"
                                         class="h-full w-full object-cover"
                                     />
                                     <section
-                                        class="text-center absolute z-10 top-0 left-0 w-full h-full flex flex-col justify-center items-center duration-200 ease-linear text-transparent hover:bg-white hover:bg-opacity-95 hover:text-slate-800 text-lg tracking-widest"
+                                        class="absolute left-0 top-0 z-10 flex h-full w-full flex-col items-center justify-center text-center text-lg tracking-widest text-transparent duration-200 ease-linear hover:bg-white hover:bg-opacity-95 hover:text-slate-800"
                                     >
-                                        <h2 class="text-center">{{ $f["JudulFoto"] }}</h2>
+                                        <h2 class="text-center">
+                                            {{ $f["JudulFoto"] }}
+                                        </h2>
                                     </section>
                                 </section>
                             </a>

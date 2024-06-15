@@ -26,7 +26,7 @@ class AlbumFactory extends Factory
 
         return [
             "NamaAlbum" => fake()->name(),
-            "DeskripsiAlbum" => fake()->text(100),
+            "Deskripsi" => fake()->text(100),
             "TanggalDibuat" => fake()->date(),
             "UserID" => fake()->randomElement($data),
         ];

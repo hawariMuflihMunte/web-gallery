@@ -43,7 +43,6 @@ class KomentarFotoController extends Controller
         $comment = $request->validate(
             [
                 "fotoid" => "required",
-                "userid" => "required",
                 "isikomentar" => "required|string|min:1",
             ],
             $commentMessage
@@ -53,7 +52,7 @@ class KomentarFotoController extends Controller
 
         $newComment = KomentarFoto::create([
             "FotoID" => $comment["fotoid"],
-            "UserID" => $comment["userid"],
+            "UserID" => auth()->id(),
             "IsiKomentar" => $comment["isikomentar"],
             "TanggalKomentar" => $currentDate,
         ]);
