@@ -1,11 +1,6 @@
 {{-- Place your links (in-head properties) here --}}
 
 <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-/>
-
-<link
     rel="manifest"
     href="{{ asset("/site.webmanifest") }}"
 />
@@ -14,6 +9,7 @@
     sizes="180x180"
     href="{{ asset("/apple-touch-icon.png") }}"
 />
+
 <link
     rel="icon"
     type="image/png"
