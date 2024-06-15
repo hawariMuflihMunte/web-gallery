@@ -42,7 +42,7 @@
                         <section class="relative h-full w-full overflow-hidden">
                             <img
                                 @if (! empty($album->foto()->get()->first()))
-                                    src="{{ url("/storage/" .$album->foto()->get()->first()["LokasiFile"],) }}"
+                                    src="{{ url($album->foto()->get()->first()["LokasiFile"],) }}"
                                     alt="{{ $album->foto()->get()->first()["DeskripsiFoto"] }}"
                                 @else
                                     src="{{ asset("images/bg_no_image.png") }}"

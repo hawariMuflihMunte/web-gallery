@@ -23,7 +23,7 @@
                 <section class="flex w-full bg-slate-200">
                     <section class="flex w-full flex-col">
                         <img
-                            src="{{ url("/storage/" . $foto["LokasiFile"]) }}"
+                            src="{{ url($foto["LokasiFile"]) }}"
                             alt="{{ $foto["DeskripsiFoto"] }}"
                             class="h-auto w-full object-contain"
                         />

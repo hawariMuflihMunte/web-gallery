@@ -55,7 +55,7 @@
                             >
                                 <section class="relative h-full w-full overflow-hidden">
                                     <img
-                                        src="{{ url("/storage/" . $f["LokasiFile"]) }}"
+                                        src="{{ url($f["LokasiFile"]) }}"
                                         alt="{{ $f["JudulFoto"] }}"
                                         loading="lazy"
                                         class="h-full w-full object-cover"
