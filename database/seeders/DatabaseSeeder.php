@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             AlbumSeeder::class,
             FotoSeeder::class,
             // PostSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
