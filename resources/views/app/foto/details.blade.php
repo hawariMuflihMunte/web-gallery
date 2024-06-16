@@ -151,6 +151,7 @@
                                         @error("isikomentar")
                                             {{ $message }}
                                         @enderror
+
                                         <input
                                             type="hidden"
                                             name="fotoid"

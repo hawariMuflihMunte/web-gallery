@@ -14,20 +14,32 @@
             alt="Web Gallery"
         />
     </a>
-    <section class="flex items-center m-0 p-0 gap-4">
+    <section class="m-0 flex items-center gap-4 p-0">
         <h1>
             <i class="bi-person-fill"></i>
-            {{ auth()->user()->Username }} @role('admin') (@lang('app.administrator')) @endrole
+            {{ auth()->user()->Username }}
+            @role("admin")
+                (
+                @lang("app.administrator")
+                )
+            @endrole
         </h1>
-        <section class="flex items-center m-0 p-0 border-l-2 border-l-slate-400">
+        <section class="m-0 flex items-center border-l-2 border-l-slate-400 p-0">
             <button
                 type="button"
-                class="rounded-sm bg-inherit px-3 py-1 m-0 outline-none transition duration-100 hover:opacity-80 flex place-content-center place-items-center"
+                class="m-0 flex place-content-center place-items-center rounded-sm bg-inherit px-3 py-1 outline-none transition duration-100 hover:opacity-80"
                 @click="openList = !openList"
                 @click.outside="openList = false"
             >
-                <i x-show="openList" class="bi-x-lg text-2xl" x-cloak></i>
-                <i x-show="!openList" class="bi-list text-2xl"></i>
+                <i
+                    x-show="openList"
+                    class="bi-x-lg text-2xl"
+                    x-cloak
+                ></i>
+                <i
+                    x-show="!openList"
+                    class="bi-list text-2xl"
+                ></i>
             </button>
             <template x-if="openList">
                 <section class="relative top-[20px]">
@@ -51,8 +63,8 @@
                                     href="{{ route("album.index") }}"
                                     class="align-center flex w-full content-between gap-2 bg-inherit p-3 text-slate-800 transition-all duration-100 hover:bg-emerald-400"
                                 >
-                                <i class="bi-ui-checks-grid"></i>
-                                <span class="w-full ps-3 text-right">
+                                    <i class="bi-ui-checks-grid"></i>
+                                    <span class="w-full ps-3 text-right">
                                         @lang("app.your_albums")
                                     </span>
                                 </a>
