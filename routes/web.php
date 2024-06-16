@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Gallery\AlbumController;
 use App\Http\Controllers\Gallery\FotoController;
 use App\Http\Controllers\Gallery\GalleryController;
 use App\Http\Controllers\Gallery\LikeFotoController;
@@ -34,6 +35,7 @@ Route::group([
     Route::get('/', function () {
         return redirect()->route('gallery.index');
     });
+    Route::resource('/album', AlbumController::class);
     Route::resource('/gallery', GalleryController::class);
     Route::resource('/foto', FotoController::class);
     Route::resource('/likefoto', LikeFotoController::class);
