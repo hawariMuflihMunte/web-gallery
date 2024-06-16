@@ -26,7 +26,7 @@
                 @click="openList = !openList"
                 @click.outside="openList = false"
             >
-                <i x-show="openList" class="bi-x-lg text-2xl"></i>
+                <i x-show="openList" class="bi-x-lg text-2xl" x-cloak></i>
                 <i x-show="!openList" class="bi-list text-2xl"></i>
             </button>
             <template x-if="openList">
