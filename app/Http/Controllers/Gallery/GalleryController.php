@@ -34,7 +34,7 @@ class GalleryController extends Controller
      */
     public function create(): View
     {
-        return view("gallery.add");
+        return view("app.gallery.add");
     }
 
     /**
@@ -118,7 +118,7 @@ class GalleryController extends Controller
         }
 
         return redirect()
-            ->route("gallery.index")
+            ->route("app.gallery.index")
             ->with("insert-success", "Berhasil menambahkan album baru !");
     }
 
@@ -208,7 +208,7 @@ class GalleryController extends Controller
         Album::destroy($id);
 
         return redirect()
-            ->route("gallery.index")
+            ->route("app. gallery.index")
             ->with("destroy-success", "Berhasil menghapus album !");
     }
 }
