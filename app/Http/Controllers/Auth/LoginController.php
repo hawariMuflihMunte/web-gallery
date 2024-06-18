@@ -6,21 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class LoginController extends Controller
 {
     public function index(): View|RedirectResponse
     {
-        if (!Auth::check()) {
+        if (!auth()->check()) {
             return view("app.auth.login");
         }
 
-        return redirect()->route("gallery.index");
+        return redirect()->route("album.index");
     }
 
-    public function authenticate(Request $request): View|RedirectResponse
+    public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             "username" => "required|string|min:1",
@@ -32,7 +31,9 @@ class LoginController extends Controller
         if (is_null($user)) {
             return redirect()
                 ->back()
-                ->with("error-login", "Akun tidak ditemukan. Coba lagi");
+                ->with([
+                    "login-error" => "{{ @lang('app.login_error') }}",
+                ]);
         }
 
         $authPassword = password_verify(
@@ -41,18 +42,19 @@ class LoginController extends Controller
         );
 
         if ($authPassword) {
-            Auth::login($user);
+            auth()->login($user);
 
             return redirect()
-                ->route("gallery.index")
-                ->with(
-                    "success-login",
-                    "Selamat datang {$credentials["username"]} !"
-                );
+                ->route("album.index")
+                ->with([
+                    "login-success" => "{{ @lang('app.login_success_with_message', ['name', {{ auth()->user()->Username }}]) }}"
+                ]);
         }
 
         return redirect()
             ->back()
-            ->with("error-login", "Akun tidak ditemukan. Coba lagi !");
+            ->with([
+                "login-error" => "{{ @lang('app.login_error') }}",
+            ]);
     }
 }
