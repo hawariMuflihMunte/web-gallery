@@ -13,7 +13,7 @@ class KomentarFoto extends Model
 
     protected $guarded = ['KomentarID'];
 
-    public function foto(): BelongsTo
+    public function photos(): BelongsTo
     {
         return $this->belongsTo(Foto::class, "FotoID");
     }
