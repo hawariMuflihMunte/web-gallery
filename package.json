@@ -29,6 +29,7 @@
         "@inertiajs/inertia-react": "^0.8.1",
         "@inertiajs/react": "^1.1.0",
         "@vitejs/plugin-react": "^4.3.0",
+        "alpinejs": "^3.14.0",
         "bootstrap-icons": "^1.11.3",
         "filepond": "^4.31.1",
         "filepond-plugin-file-encode": "^2.1.14",

@@ -13,6 +13,7 @@ export default defineConfig({
                 'resources/js/app.jsx',
                 'resources/js/filepond.js',
                 'resources/js/flowbite.js',
+                'resources/js/alpine.js',
             ],
             refresh: true,
         }),
