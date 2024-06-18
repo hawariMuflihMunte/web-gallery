@@ -11,6 +11,8 @@
 
         @vite([
             "resources/css/app.css",
+            "resources/js/alpine.js",
+            "resources/js/flowbite.js",
             "resources/js/filepond.js",
         ])
 
