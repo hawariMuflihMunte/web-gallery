@@ -12,7 +12,7 @@ class LikeFoto extends Model
 
     protected $guarded = ['LikeID'];
 
-    public function foto(): BelongsTo
+    public function photos(): BelongsTo
     {
         return $this->belongsTo(Foto::class, "FotoID");
     }
