@@ -7,17 +7,11 @@ use App\Models\Album;
 use App\Models\Foto;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
-class FotoController extends Controller
+class PhotoController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware("auth");
-    }
-
     /**
      * Display a listing of the resource.
      */
@@ -56,7 +50,7 @@ class FotoController extends Controller
         );
 
         $currentDate = date("Y-m-d");
-        $currentUserID = Auth::id();
+        $currentUserID = auth()->id();
         $currentAlbumID = $request->input("albumid");
         $album = Album::where("AlbumID", $currentAlbumID)->get()->first();
 
@@ -114,7 +108,7 @@ class FotoController extends Controller
         $album = $foto->album()->get()->first();
         $user = $foto->user()->get()->first();
 
-        $currentUserID = Auth::id();
+        $currentUserID = auth()->id();
         $currentFotoOwnerID = $foto->user()->get()->first()["UserID"];
         $editable = false;
         $liked = false;
