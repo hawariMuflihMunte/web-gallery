@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Album;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AlbumSeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class AlbumSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('album')->delete();
+
         Album::factory(10)->create();
     }
 }
