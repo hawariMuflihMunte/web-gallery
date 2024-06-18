@@ -13,7 +13,7 @@ class Modal extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(string $modalId = null)
+    public function __construct(?string $modalId = null)
     {
         $this->modalId = $modalId;
     }
