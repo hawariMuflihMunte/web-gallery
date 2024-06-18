@@ -37,7 +37,7 @@ Route::group([
     });
     Route::resource('/album', AlbumController::class);
     Route::resource('/gallery', GalleryController::class);
-    Route::resource('/foto', FotoController::class);
+    Route::resource('/photo', FotoController::class);
     Route::resource('/likefoto', LikeFotoController::class);
     Route::resource('/komentarfoto', KomentarFotoController::class);
     Route::resource('/profile', ProfileController::class);
