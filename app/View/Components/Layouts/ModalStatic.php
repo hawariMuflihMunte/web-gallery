@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ModalButton extends Component
+class ModalStatic extends Component
 {
     public ?string $modalId;
 
@@ -23,7 +23,7 @@ class ModalButton extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.layouts.modal-button', [
+        return view('components.layouts.modal-static', [
             'modalId' => $this->modalId,
         ]);
     }
