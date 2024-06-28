@@ -13,7 +13,7 @@ class LoginController extends Controller
     public function index(): View|RedirectResponse
     {
         if (!auth()->check()) {
-            return view("app.auth.login");
+            return view("pages.auth-login");
         }
 
         return redirect()->route("album.index");
@@ -32,7 +32,7 @@ class LoginController extends Controller
             return redirect()
                 ->back()
                 ->with([
-                    "login-error" => "{{ @lang('app.login_error') }}",
+                    "login-error" => __('app.login_error'),
                 ]);
         }
 
@@ -47,14 +47,14 @@ class LoginController extends Controller
             return redirect()
                 ->route("album.index")
                 ->with([
-                    "login-success" => "{{ @lang('app.login_success_with_message', ['name', {{ auth()->user()->Username }}]) }}"
+                    "login-success" => __('app.login_success_with_message', ['name', auth()->user()->Username]),
                 ]);
         }
 
         return redirect()
             ->back()
             ->with([
-                "login-error" => "{{ @lang('app.login_error') }}",
+                "login-error" => "{{ __('app.login_error') }}",
             ]);
     }
 }
