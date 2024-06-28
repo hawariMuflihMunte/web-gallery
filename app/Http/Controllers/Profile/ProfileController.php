@@ -5,23 +5,17 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware("auth");
-    }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
-        return view("app.profile.index", compact("user"));
+        return view("pages.profile-index", compact("user"));
     }
 
     /**
@@ -43,7 +37,7 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
         //
     }
@@ -51,7 +45,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
         //
     }
@@ -59,196 +53,59 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        $user = Auth::user();
-        $changes = [
-            "username" => false,
-            "email" => false,
-            "namalengkap" => false,
-            "alamat" => false,
+        dd($request->all(), $user);
+
+        $message = [
+            "username.min" => "Masukkan minimal 1 karakter !",
+            "namalengkap.min" => "Masukkan minimal 1 karakter !",
+            "email.min" => "Masukkan minimal 1 karakter !",
+            "alamat.min" => "Masukkan minimal 1 karakter !",
+            "unique" => "Tidak dapat memproses data !",
         ];
 
-        if (!is_null($request->input("username"))) {
-            $data = $request->validate([
-                "username" => "required|string|min:1",
-            ]);
+        $validation = [
+            'alamat' => 'required|min:1',
+        ];
 
-            // Check if the user inputs new value or just re-input the existing value
-            $checkUpdate = User::where("UserID", $user["UserID"])
-                ->where("Username", $data["username"])
-                ->get()
-                ->first();
-            //   dd($checkUpdate);
-
-            if (is_null($checkUpdate)) {
-                $update = User::where("UserID", $user["UserID"])->update([
-                    "Username" => $data["username"],
-                ]);
-
-                if (!($update > 0)) {
-                    return redirect()
-                        ->back()
-                        ->withErrors([
-                            "error" =>
-                                "Terjadi kesalahan, tidak dapat memperbarui data. Silahkan coba lagi !",
-                        ]);
-                }
-
-                $changes["username"] = true;
-            }
+        if ($user->Username != $request->username) {
+            $validation['username'] = 'required|min:1|unique:user,Username';
         }
 
-        if (!is_null($request->input("email"))) {
-            $data = $request->validate([
-                "email" => "required|email:unique",
-            ]);
-
-            // Check if the user inputs new value or just re-input the existing value
-            $checkUpdate = User::where("UserID", $user["UserID"])
-                ->where("Email", $data["email"])
-                ->get()
-                ->first();
-            //   dd($checkUpdate);
-
-            if (is_null($checkUpdate)) {
-                $update = User::where("UserID", $user["UserID"])->update([
-                    "Email" => $data["email"],
-                ]);
-
-                if (!($update > 0)) {
-                    return redirect()
-                        ->back()
-                        ->withErrors([
-                            "error" =>
-                                "Terjadi kesalahan, tidak dapat memperbarui data. Silahkan coba lagi !",
-                        ]);
-                }
-
-                $changes["email"] = true;
-            }
+        if ($user->NamaLengkap != $request->namalengkap) {
+            $validation['namalengkap'] = 'required|min:1|unique:user,NamaLengkap';
         }
 
-        if (!is_null($request->input("namalengkap"))) {
-            $data = $request->validate([
-                "namalengkap" =>
-                    'required|string|min:1|regex:/^[a-zA-Z]+(?:[\s,\.]{1,2}[a-zA-Z]+)*$/',
-            ]);
-
-            // Check if the user inputs new value or just re-input the existing value
-            $checkUpdate = User::where("UserID", $user["UserID"])
-                ->where("NamaLengkap", $data["namalengkap"])
-                ->get()
-                ->first();
-            //   dd($checkUpdate);
-
-            if (is_null($checkUpdate)) {
-                $update = User::where("UserID", $user["UserID"])->update([
-                    "NamaLengkap" => $data["namalengkap"],
-                ]);
-
-                if (!($update > 0)) {
-                    return redirect()
-                        ->back()
-                        ->withErrors([
-                            "error" =>
-                                "Terjadi kesalahan, tidak dapat memperbarui data. Silahkan coba lagi !",
-                        ]);
-                }
-
-                $changes["namalengkap"] = true;
-            }
+        if ($user->Email != $request->email) {
+            $validation['email'] = 'required|min:1|unique:user,Email';
         }
 
-        if (!is_null($request->input("alamat"))) {
-            $data = $request->validate([
-                //   "alamat" => 'required|string|min:1|regex:/^[a-zA-Z]+(?:[\s,\.]{1,2}[a-zA-Z]+)*$/',
-                "alamat" => "required|string|min:1",
-            ]);
+        $profile = $request->validate($validation, $message);
 
-            // Check if the user inputs new value or just re-input the existing value
-            $checkUpdate = User::where("UserID", $user["UserID"])
-                ->where("Alamat", $data["alamat"])
-                ->get()
-                ->first();
-            //   dd($checkUpdate);
+        $update = [
+            'Username' => $profile['username'] ?? $user->Username,
+            'NamaLengkap' => $profile['namalengkap'] ?? $user->NamaLengkap,
+            'Email' => $profile['email'] ?? $user->Email,
+            'Alamat' => $profile['alamat'],
+        ];
 
-            if (is_null($checkUpdate)) {
-                $update = User::where("UserID", $user["UserID"])->update([
-                    "Alamat" => trim($data["alamat"]),
-                ]);
-
-                if (!($update > 0)) {
-                    return redirect()
-                        ->back()
-                        ->withErrors([
-                            "error" =>
-                                "Terjadi kesalahan, tidak dapat memperbarui data. Silahkan coba lagi !",
-                        ]);
-                }
-
-                $changes["alamat"] = true;
-            }
-        }
-
-        if (
-            $changes["username"] &&
-            $changes["email"] &&
-            $changes["namalengkap"]
-        ) {
-            return redirect()
-                ->back()
-                ->with([
-                    "success" => "Berhasil memperbarui data !",
-                ]);
-        }
-
-        if ($changes["username"]) {
-            return redirect()
-                ->back()
-                ->with([
-                    "success-username" => "Berhasil memperbarui Username !",
-                ]);
-        }
-
-        if ($changes["email"]) {
-            return redirect()
-                ->back()
-                ->with([
-                    "success-email" => "Berhasil memperbarui Email !",
-                ]);
-        }
-
-        if ($changes["namalengkap"]) {
-            return redirect()
-                ->back()
-                ->with([
-                    "success-namalengkap" =>
-                        "Berhasil memperbarui Nama Lengkap !",
-                ]);
-        }
-
-        if ($changes["alamat"]) {
-            return redirect()
-                ->back()
-                ->with([
-                    "success-alamat" => "Berhasil memperbarui Alamat !",
-                ]);
-        }
+        $user->update($update);
 
         return redirect()
-            ->back()
-            ->withErrors([
-                "error" => "Tidak ada data yang diubah !",
+            ->route("profile.index")
+            ->with([
+                "profile-update-success" => "{{ __('app.profile-update-success') }}",
             ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        User::destroy($id);
+        // User::destroy($id);
+        $user->delete();
 
         return redirect()
             ->route("login")
