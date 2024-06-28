@@ -96,7 +96,7 @@ class UserController extends Controller
         return redirect()
             ->back()
             ->with([
-                "profile-update-success" => __("app.profile-update-success"),
+                "profile-update-success" => __("app.profile_update_success"),
             ]);
     }
 
