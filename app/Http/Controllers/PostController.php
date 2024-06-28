@@ -14,8 +14,8 @@ class PostController extends Controller
      */
     public function index(): InertiaResponse
     {
-        return Inertia::render('Index', [
-            'posts' => Post::all(),
+        return Inertia::render("Index", [
+            "posts" => Post::all(),
         ]);
     }
 
@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function create(): InertiaResponse
     {
-        return Inertia::render('Create');
+        return Inertia::render("Create");
     }
 
     /**
@@ -33,8 +33,8 @@ class PostController extends Controller
     public function store(Request $request): void
     {
         Post::create([
-            'title' => $request->title,
-            'body' => $request->body,
+            "title" => $request->title,
+            "body" => $request->body,
         ]);
     }
 
@@ -43,8 +43,8 @@ class PostController extends Controller
      */
     public function show(Post $post): InertiaResponse
     {
-        return Inertia::render('Show', [
-            'post' => $post,
+        return Inertia::render("Show", [
+            "post" => $post,
         ]);
     }
 
@@ -53,8 +53,8 @@ class PostController extends Controller
      */
     public function edit(Post $post): InertiaResponse
     {
-        return Inertia::render('Edit', [
-            'post' => $post,
+        return Inertia::render("Edit", [
+            "post" => $post,
         ]);
     }
 
@@ -64,8 +64,8 @@ class PostController extends Controller
     public function update(Request $request, Post $post): void
     {
         $post->update([
-            'title' => $request->title,
-            'body' => $request->body,
+            "title" => $request->title,
+            "body" => $request->body,
         ]);
     }
 
