@@ -19,39 +19,41 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import FilePondPluginImageValidateSize from "filepond-plugin-image-validate-size";
 
 FilePond.registerPlugin(
-    FilePondPluginFileEncode,
-    FilePondPluginFileValidateSize,
-    FilePondPluginFileMetadata,
-    FilePondPluginFilePoster,
-    FilePondPluginFileRename,
-    FilePondPluginFileValidateType,
-    FilePondPluginImageEdit,
-    FilePondPluginImageExifOrientation,
-    FilePondPluginImagePreview,
-    FilePondPluginImageValidateSize,
+  FilePondPluginFileEncode,
+  FilePondPluginFileValidateSize,
+  FilePondPluginFileMetadata,
+  FilePondPluginFilePoster,
+  FilePondPluginFileRename,
+  FilePondPluginFileValidateType,
+  FilePondPluginImageEdit,
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginImageValidateSize,
 );
 
 const targetElement = document.querySelector("input[type='file'].filepond");
-const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+const csrfToken = document
+  .querySelector("meta[name='csrf-token']")
+  .getAttribute("content");
 
 FilePond.create(targetElement).setOptions({
-    name: "filepond",
-    required: true,
-    allowMultiple: true,
-    maxFiles: 10,
-    maxFileSize: '2MB',
-    server: {
-        url: 'http://127.0.0.1:5151',
-        process: {
-            url: 'upload/process',
-            method: 'POST',
-            process: "/upload/process",
-            headers: {
-                "X-CSRF-TOKEN": csrfToken,
-            },
-            fetch: null,
-            revert: null,
-            timeout: 10000,
-        }
+  name: "filepond",
+  required: true,
+  allowMultiple: true,
+  maxFiles: 10,
+  maxFileSize: "2MB",
+  server: {
+    url: "http://127.0.0.1:5151",
+    process: {
+      url: "upload/process",
+      method: "POST",
+      process: "/upload/process",
+      headers: {
+        "X-CSRF-TOKEN": csrfToken,
+      },
+      fetch: null,
+      revert: null,
+      timeout: 10000,
     },
+  },
 });
