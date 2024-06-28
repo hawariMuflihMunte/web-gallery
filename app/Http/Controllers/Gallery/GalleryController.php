@@ -118,7 +118,7 @@ class GalleryController extends Controller
         }
 
         return redirect()
-            ->route("app.gallery.index")
+            ->route("gallery.index")
             ->with("insert-success", "Berhasil menambahkan album baru !");
     }
 
@@ -150,7 +150,10 @@ class GalleryController extends Controller
             $editable = false;
         }
 
-        return view("app.gallery.details", compact("album", "foto", "editable"));
+        return view(
+            "app.gallery.details",
+            compact("album", "foto", "editable")
+        );
     }
 
     /**
@@ -208,7 +211,7 @@ class GalleryController extends Controller
         Album::destroy($id);
 
         return redirect()
-            ->route("app. gallery.index")
+            ->route("gallery.index")
             ->with("destroy-success", "Berhasil menghapus album !");
     }
 }
