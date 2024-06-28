@@ -16,21 +16,21 @@ class Foto extends Model
     protected $primaryKey = "FotoID";
     public $timestamps = false;
 
-    protected $guarded = ['FotoID'];
+    protected $guarded = ["FotoID"];
 
     /**
-	 * Get the options for generating the slug.
-	 */
-    public function getSlugOptions() : SlugOptions
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('JudulFoto')
-            ->saveSlugsTo('slug');
+            ->generateSlugsFrom("JudulFoto")
+            ->saveSlugsTo("slug");
     }
 
     public function getRouteKeyName(): string
     {
-        return 'slug';
+        return "slug";
     }
 
     public function album(): BelongsTo
