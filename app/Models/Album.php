@@ -17,21 +17,21 @@ class Album extends Model
     protected $primaryKey = "AlbumID";
     public $timestamps = false;
 
-    protected $guarded = ['AlbumID'];
+    protected $guarded = ["AlbumID"];
 
     /**
-	 * Get the options for generating the slug.
-	 */
-    public function getSlugOptions() : SlugOptions
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('NamaAlbum')
-            ->saveSlugsTo('slug');
+            ->generateSlugsFrom("NamaAlbum")
+            ->saveSlugsTo("slug");
     }
 
     public function getRouteKeyName(): string
     {
-        return 'slug';
+        return "slug";
     }
 
     public function photos(): HasMany
