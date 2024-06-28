@@ -405,7 +405,7 @@
                         method="post"
                     >
                         @csrf
-                        @method("UPDATE")
+                        @method("PUT")
                         <section class="flex flex-col gap-4">
                             <section>
                                 <label
