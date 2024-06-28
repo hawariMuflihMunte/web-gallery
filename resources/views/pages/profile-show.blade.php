@@ -13,8 +13,7 @@
         <section
             class="mx-auto flex h-max max-w-[92%] flex-col gap-4 px-5 py-3 md:max-w-[80%]"
         >
-
-            @session('profile-update-success')
+            @session("profile-update-success")
                 <x-messages.alert-dismissible>
                     {{ $value }}
                 </x-messages.alert-dismissible>
@@ -59,7 +58,7 @@
                                 name="namalengkap"
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                 placeholder="{{ __("app.full_name") }}"
-                                value="{{ auth()->user()->NamaLengkap }}""
+                                value="{{ auth()->user()->NamaLengkap }}"
                                 required
                             />
                         </div>

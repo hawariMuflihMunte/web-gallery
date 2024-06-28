@@ -1,4 +1,5 @@
-@props(['margin'])
+@props([
+    "margin",
+])
 
-<hr class="h-px {{ $margin ?? 'my-8' }} bg-gray-200 border-0 dark:bg-gray-700">
-
+<hr class="{{ $margin ?? "my-8" }} h-px border-0 bg-gray-200 dark:bg-gray-700" />

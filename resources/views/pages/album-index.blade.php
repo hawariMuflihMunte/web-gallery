@@ -35,7 +35,7 @@
             <h1 class="mb-12 text-center text-2xl font-semibold sm:text-left">
                 @lang("app.albums")
             </h1>
-            <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <section class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
                 @if (count($albums) > 0)
                     @foreach ($albums as $album)
                         <section class="grid gap-4">
@@ -58,7 +58,9 @@
                                     <section
                                         class="absolute left-0 top-0 z-10 flex h-full w-full flex-col items-center justify-center text-center text-lg tracking-widest text-transparent duration-200 ease-linear hover:bg-white hover:bg-opacity-95 hover:text-slate-800"
                                     >
-                                        <h2 class="text-center">{{ $album["NamaAlbum"] }}</h2>
+                                        <h2 class="text-center">
+                                            {{ $album["NamaAlbum"] }}
+                                        </h2>
                                     </section>
                                 </section>
                             </a>
@@ -73,12 +75,11 @@
                             alt="No Photo. Click to add"
                             loading="lazy"
                             class="block transition-all duration-200"
-                        >
+                        />
                         <h2>No Albums Found</h2>
                     </section>
                 @endif
             </section>
-
         </section>
     </main>
 

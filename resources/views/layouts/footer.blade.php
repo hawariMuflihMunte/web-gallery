@@ -24,7 +24,7 @@
                         href="{{ route("album.index") }}"
                         class="me-4 hover:underline md:me-6"
                     >
-                        @lang('app.home')
+                        @lang("app.home")
                     </a>
                 </li>
             </ul>
@@ -43,7 +43,9 @@
             >
                 @lang("app.app_name")
             </a>
-            . @lang('app.all_rights_reserved').
+            .
+            @lang("app.all_rights_reserved")
+            .
         </span>
     </div>
 </footer>
