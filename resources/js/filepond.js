@@ -1,5 +1,6 @@
 import * as FilePond from "filepond";
 import "filepond/dist/filepond.min.css";
+
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css";
 
@@ -30,12 +31,27 @@ FilePond.registerPlugin(
     FilePondPluginImageValidateSize,
 );
 
-FilePond.create(document.querySelector(".filepond"));
+const targetElement = document.querySelector("input[type='file'].filepond");
+const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
-FilePond.setOptions({
+FilePond.create(targetElement).setOptions({
     name: "filepond",
     required: true,
-    multiple: true,
+    allowMultiple: true,
     maxFiles: 10,
-    maxFileSize: 2, // 2 MB
+    maxFileSize: '2MB',
+    server: {
+        url: 'http://127.0.0.1:5151',
+        process: {
+            url: 'upload/process',
+            method: 'POST',
+            process: "/upload/process",
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            fetch: null,
+            revert: null,
+            timeout: 10000,
+        }
+    },
 });
