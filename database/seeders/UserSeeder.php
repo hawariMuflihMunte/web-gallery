@@ -21,13 +21,14 @@ class UserSeeder extends Seeder
         foreach ($users as $user) {
             $user->assignRole('user');
         }
-        
+
         // Create User only if it doesn't already exist
         if (!User::where('Email', 'user@user.net')->exists()) {
             User::create([
                 'Username' => 'sser',
                 'Password' => Hash::make('12345678'),
                 'Email' => 'user@user.net',
+                'Gender' => 'male',
                 'NamaLengkap' => 'User',
                 'Alamat' => '-',
             ])->assignRole('user');
@@ -40,6 +41,7 @@ class UserSeeder extends Seeder
                 'Password' => Hash::make('administrator'),
                 'Email' => 'admin@admin.com',
                 'NamaLengkap' => 'Administrator',
+                'Gender' => 'male',
                 'Alamat' => '-',
             ])->assignRole('admin');
         }
