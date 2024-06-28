@@ -57,10 +57,10 @@ class KomentarFotoController extends Controller
             "TanggalKomentar" => $currentDate,
         ]);
 
-        $foto = $newComment->foto()->get()->first();
+        $foto = $newComment->photo()->first();
 
         return redirect()
-            ->route("foto.edit", $foto)
+            ->route("foto.show", $foto["slug"])
             ->with([
                 "success-comment" => "Berhasil menambah komentar !",
             ]);
