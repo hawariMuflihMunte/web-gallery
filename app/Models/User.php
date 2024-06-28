@@ -17,7 +17,7 @@ class User extends Authenticatable
     protected $primaryKey = "UserID";
     public $timestamps = false;
 
-    protected $guarded = ['UserID'];
+    protected $guarded = ["UserID"];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -36,18 +36,18 @@ class User extends Authenticatable
     ];
 
     /**
-	 * Get the options for generating the slug.
-	 */
-    public function getSlugOptions() : SlugOptions
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('Username')
-            ->saveSlugsTo('slug');
+            ->generateSlugsFrom("Username")
+            ->saveSlugsTo("slug");
     }
 
     public function getRouteKeyName(): string
     {
-        return 'slug';
+        return "slug";
     }
 
     public function albums(): HasMany
