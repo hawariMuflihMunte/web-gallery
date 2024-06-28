@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Foto;
 use App\Models\LikeFoto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LikeFotoController extends Controller
 {
@@ -36,23 +35,21 @@ class LikeFotoController extends Controller
      */
     public function store(Request $request)
     {
-        $userID = Auth::id();
-        $fotoID = $request->input("fotoid");
+        $userID = auth()->id();
+        $slug = $request->input("slug");
         $currentDate = date("Y-m-d");
 
+        $foto = Foto::firstWhere("slug", $slug);
+
         LikeFoto::create([
-            "FotoID" => $fotoID,
+            "FotoID" => $foto['FotoID'],
             "UserID" => $userID,
             "TanggalLike" => $currentDate,
         ]);
 
-        $foto = Foto::find($fotoID);
-
         return redirect()
-            ->route("foto.edit", [
-                "foto" => $foto,
-            ])
-            ->with("like-success", "Berhasil memberikan like !");
+            ->route("foto.show", $slug)
+            ->with(["liked" => __('app.liked')]);
     }
 
     /**
@@ -84,15 +81,13 @@ class LikeFotoController extends Controller
      */
     public function destroy(string $id)
     {
-        $likefoto = LikeFoto::find($id);
-        $foto = $likefoto->foto()->get()->first();
+        $likefoto = LikeFoto::firstWhere(["LikeID" => $id]);
+        $foto = $likefoto->photo()->first();
 
-        LikeFoto::destroy($id);
+        $likefoto->delete();
 
         return redirect()
-            ->route("foto.edit", [
-                "foto" => $foto,
-            ])
-            ->with("unlike-success", "Berhasil menghapus like !");
+            ->route("foto.show", $foto['slug'])
+            ->with(["unlike" => __('app.unlike')]);
     }
 }
