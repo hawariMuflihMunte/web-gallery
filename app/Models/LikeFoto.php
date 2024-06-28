@@ -10,9 +10,9 @@ class LikeFoto extends Model
     protected $primaryKey = "LikeID";
     public $timestamps = false;
 
-    protected $guarded = ['LikeID'];
+    protected $guarded = ["LikeID"];
 
-    public function foto(): BelongsTo
+    public function photo(): BelongsTo
     {
         return $this->belongsTo(Foto::class, "FotoID");
     }

@@ -1,6 +1,6 @@
 @extends("layouts.app")
 
-@section("title", "Web Gallery | Add Album")
+@section("title", "Web Gallery | {{ @lang('app.add_album') }}")
 
 @section("content")
     @include("layouts.nav")

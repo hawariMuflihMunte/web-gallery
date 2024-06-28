@@ -12,6 +12,8 @@ export default defineConfig({
                 'resources/css/bootstrap-icons.css',
                 'resources/js/app.jsx',
                 'resources/js/filepond.js',
+                'resources/js/flowbite.js',
+                'resources/js/alpine.js',
             ],
             refresh: true,
         }),
