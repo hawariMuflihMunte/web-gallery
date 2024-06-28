@@ -11,7 +11,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view("app.auth.register");
+        return view("pages.auth-register");
     }
 
     public function register(Request $request)
@@ -34,10 +34,9 @@ class RegisterController extends Controller
         if (!empty($checkUsernameFromDB)) {
             return redirect()
                 ->back()
-                ->with(
-                    "error-register",
-                    "Username sudah terpakai. Gunakan username lain !"
-                )
+                ->with([
+                    "error-register" => "Username sudah terpakai. Gunakan username lain !",
+                ])
                 ->withInput();
         }
 
