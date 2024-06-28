@@ -42,14 +42,14 @@ class LikeFotoController extends Controller
         $foto = Foto::firstWhere("slug", $slug);
 
         LikeFoto::create([
-            "FotoID" => $foto['FotoID'],
+            "FotoID" => $foto["FotoID"],
             "UserID" => $userID,
             "TanggalLike" => $currentDate,
         ]);
 
         return redirect()
             ->route("foto.show", $slug)
-            ->with(["liked" => __('app.liked')]);
+            ->with(["liked" => __("app.liked")]);
     }
 
     /**
@@ -87,7 +87,7 @@ class LikeFotoController extends Controller
         $likefoto->delete();
 
         return redirect()
-            ->route("foto.show", $foto['slug'])
-            ->with(["unlike" => __('app.unlike')]);
+            ->route("foto.show", $foto["slug"])
+            ->with(["unlike" => __("app.unlike")]);
     }
 }

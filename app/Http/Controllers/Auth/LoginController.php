@@ -32,7 +32,7 @@ class LoginController extends Controller
             return redirect()
                 ->back()
                 ->with([
-                    "login-error" => __('app.login_error'),
+                    "login-error" => __("app.login_error"),
                 ]);
         }
 
@@ -47,7 +47,10 @@ class LoginController extends Controller
             return redirect()
                 ->route("album.index")
                 ->with([
-                    "login-success" => __('app.login_success_with_message', ['name', auth()->user()->Username]),
+                    "login-success" => __("app.login_success_with_message", [
+                        "name",
+                        auth()->user()->Username,
+                    ]),
                 ]);
         }
 

@@ -38,29 +38,39 @@ class FotoController extends Controller
             "deskripsifoto" => "required|min:1",
         ]);
 
-        $request->validate([
-            "images" => "required|array",
-            "images.*" => "required|mimes:jpg,jpeg,png|max:2048",
-        ], [
-            "images.max" => "Ukuran maksimal file adalah 2MB !",
-        ]);
+        $request->validate(
+            [
+                "images" => "required|array",
+                "images.*" => "required|mimes:jpg,jpeg,png|max:2048",
+            ],
+            [
+                "images.max" => "Ukuran maksimal file adalah 2MB !",
+            ]
+        );
 
         $currentDate = date("Y-m-d");
         $currentUserID = auth()->id();
         $slug = $request->slug;
-        $album = Album::firstWhere(['slug' => $slug]);
+        $album = Album::firstWhere(["slug" => $slug]);
         $images = $request->file("images");
 
         $i = 0;
         foreach ($images as $image) {
-            $sanitizedImage = strtotime($album['TanggalUnggah']).random_int(0, 999999).'.'.strtolower($image->getClientOriginalExtension());
+            $sanitizedImage =
+                strtotime($album["TanggalUnggah"]) .
+                random_int(0, 999999) .
+                "." .
+                strtolower($image->getClientOriginalExtension());
             $filterAlbum = preg_replace(
                 "/[^a-zA-Z0-9]/",
                 "",
                 strtolower($album["NamaAlbum"])
             );
-            $filepath = $image
-                ->storeAs($filterAlbum, $sanitizedImage, "public");
+            $filepath = $image->storeAs(
+                $filterAlbum,
+                $sanitizedImage,
+                "public"
+            );
 
             Foto::create([
                 "JudulFoto" => $foto["judulfoto"][$i],
@@ -77,7 +87,7 @@ class FotoController extends Controller
         return redirect()
             ->route("album.edit", $album["slug"])
             ->with([
-                "upload-success" => __('app.images_upload_success'),
+                "upload-success" => __("app.images_upload_success"),
             ]);
     }
 
@@ -156,7 +166,9 @@ class FotoController extends Controller
             return redirect()
                 ->route("gallery.edit", $album)
                 ->with([
-                    "photo_file_not_found_delete_success" => __('app.photo_file_not_found_delete_success'),
+                    "photo_file_not_found_delete_success" => __(
+                        "app.photo_file_not_found_delete_success"
+                    ),
                 ]);
         }
 
@@ -167,7 +179,7 @@ class FotoController extends Controller
         return redirect()
             ->route("album.edit", $album["slug"])
             ->with([
-                "photo_delete_success" => __('app.photo_delete_success'),
+                "photo_delete_success" => __("app.photo_delete_success"),
             ]);
     }
 }

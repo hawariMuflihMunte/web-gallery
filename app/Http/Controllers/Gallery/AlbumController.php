@@ -36,13 +36,16 @@ class AlbumController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $album = $request->validate([
-            "namaalbum" => "required|string|min:1",
-            "deskripsi" => "required|string|min:1",
-        ], [
-            "namaalbum.min" => "Masukkan minimal 1 karakter !",
-            "deskripsi.min" => "Masukkan minimal 1 karakter !",
-        ]);
+        $album = $request->validate(
+            [
+                "namaalbum" => "required|string|min:1",
+                "deskripsi" => "required|string|min:1",
+            ],
+            [
+                "namaalbum.min" => "Masukkan minimal 1 karakter !",
+                "deskripsi.min" => "Masukkan minimal 1 karakter !",
+            ]
+        );
 
         $currentDate = date("Y-m-d");
         $currentUserID = auth()->id();
@@ -59,25 +62,35 @@ class AlbumController extends Controller
             "deskripsifoto" => "required|min:1",
         ]);
 
-        $request->validate([
-            "images" => "required|array",
-            "images.*" => "required|mimes:jpg,jpeg,png|max:2048",
-        ], [
-            "images.max" => "Ukuran maksimal file adalah 2MB !",
-        ]);
+        $request->validate(
+            [
+                "images" => "required|array",
+                "images.*" => "required|mimes:jpg,jpeg,png|max:2048",
+            ],
+            [
+                "images.max" => "Ukuran maksimal file adalah 2MB !",
+            ]
+        );
 
         $images = $request->file("images");
 
         $i = 0;
         foreach ($images as $image) {
-            $sanitizedImage = strtotime($newAlbum['TanggalDibuat']).random_int(0, 999999).'.'.strtolower($image->getClientOriginalExtension());
+            $sanitizedImage =
+                strtotime($newAlbum["TanggalDibuat"]) .
+                random_int(0, 999999) .
+                "." .
+                strtolower($image->getClientOriginalExtension());
             $filterAlbum = preg_replace(
                 "/[^a-zA-Z0-9]/",
                 "",
                 strtolower($newAlbum["NamaAlbum"])
             );
-            $filepath = $image
-                ->storeAs($filterAlbum, $sanitizedImage, "public");
+            $filepath = $image->storeAs(
+                $filterAlbum,
+                $sanitizedImage,
+                "public"
+            );
 
             Foto::create([
                 "JudulFoto" => $foto["judulfoto"][$i],
@@ -94,7 +107,7 @@ class AlbumController extends Controller
         return redirect()
             ->route("album.index")
             ->with([
-                "album-add-success" => __('app.album-add-success'),
+                "album-add-success" => __("app.album-add-success"),
             ]);
     }
 
@@ -158,7 +171,7 @@ class AlbumController extends Controller
         return redirect()
             ->route("album.edit", $album["slug"])
             ->with([
-                "album-update-success" => __('app.album-update-success'),
+                "album-update-success" => __("app.album-update-success"),
             ]);
     }
 
@@ -167,10 +180,10 @@ class AlbumController extends Controller
      */
     public function destroy(Album $album): RedirectResponse
     {
-        $photos = $album->photos()->pluck('LokasiFile');
+        $photos = $album->photos()->pluck("LokasiFile");
 
         // Delete photos from storage
-        Storage::disk('public')->delete($photos->toArray());
+        Storage::disk("public")->delete($photos->toArray());
 
         // Delete album and photos
         $album->delete();
@@ -178,7 +191,7 @@ class AlbumController extends Controller
         return redirect()
             ->route("album.index")
             ->with([
-                "album-delete-success" => __('app.album-delete-success'),
+                "album-delete-success" => __("app.album-delete-success"),
             ]);
     }
 }

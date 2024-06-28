@@ -35,7 +35,8 @@ class RegisterController extends Controller
             return redirect()
                 ->back()
                 ->with([
-                    "error-register" => "Username sudah terpakai. Gunakan username lain !",
+                    "error-register" =>
+                        "Username sudah terpakai. Gunakan username lain !",
                 ])
                 ->withInput();
         }

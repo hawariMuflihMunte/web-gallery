@@ -64,28 +64,29 @@ class UserController extends Controller
         ];
 
         $validation = [
-            'alamat' => 'required|min:1',
+            "alamat" => "required|min:1",
         ];
 
         if ($user->Username != $request->username) {
-            $validation['username'] = 'required|min:1|unique:user,Username';
+            $validation["username"] = "required|min:1|unique:user,Username";
         }
 
         if ($user->NamaLengkap != $request->namalengkap) {
-            $validation['namalengkap'] = 'required|min:1|unique:user,NamaLengkap';
+            $validation["namalengkap"] =
+                "required|min:1|unique:user,NamaLengkap";
         }
 
         if ($user->Email != $request->email) {
-            $validation['email'] = 'required|min:1|unique:user,Email';
+            $validation["email"] = "required|min:1|unique:user,Email";
         }
 
         $profile = $request->validate($validation, $message);
 
         $update = [
-            'Username' => $profile['username'] ?? $user->Username,
-            'NamaLengkap' => $profile['namalengkap'] ?? $user->NamaLengkap,
-            'Email' => $profile['email'] ?? $user->Email,
-            'Alamat' => $profile['alamat'],
+            "Username" => $profile["username"] ?? $user->Username,
+            "NamaLengkap" => $profile["namalengkap"] ?? $user->NamaLengkap,
+            "Email" => $profile["email"] ?? $user->Email,
+            "Alamat" => $profile["alamat"],
         ];
 
         if ($user != $update) {
@@ -95,7 +96,7 @@ class UserController extends Controller
         return redirect()
             ->back()
             ->with([
-                "profile-update-success" => __('app.profile-update-success'),
+                "profile-update-success" => __("app.profile-update-success"),
             ]);
     }
 
