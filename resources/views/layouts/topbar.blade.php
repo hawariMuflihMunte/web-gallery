@@ -1,4 +1,4 @@
-<nav class="fixed z-50 w-full border-gray-200 bg-slate-100 dark:bg-gray-900">
+<nav class="fixed z-40 w-full border-gray-200 bg-slate-100 dark:bg-gray-900">
     <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         <a
             href="{{ route("album.index") }}"
@@ -7,7 +7,7 @@
             <img
                 src="{{ asset("images/application/sphertra.png") }}"
                 class="h-8"
-                alt="{{ __('app.app_name') }} Logo"
+                alt="{{ __("app.app_name") }} Logo"
             />
             <span
                 class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
@@ -43,7 +43,7 @@
                         {{ auth()->user()->NamaLengkap }}
                     </span>
                     <span class="block truncate text-sm text-gray-500 dark:text-gray-400">
-                        {{ '@' }}{{ auth()->user()->Username }}
+                        {{ "@" }}{{ auth()->user()->Username }}
                     </span>
                 </div>
                 <ul
@@ -60,7 +60,7 @@
                     </li>
                     <li>
                         <a
-                            href="{{ route('profile.index') }}"
+                            href="{{ route("user.show", auth()->user()->slug) }}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                             @lang("app.settings")
@@ -106,20 +106,20 @@
             id="navbar-user"
         >
             <ul
-                class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 md:bg-transparent p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse"
+                class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-transparent md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse"
             >
                 <li>
                     <a
                         href="{{ route("album.index") }}"
-                        @if(request()->is('album'))
-                            class="block rounded px-3 py-2 text-white sm:bg-transparent md:p-0 bg-blue-700 md:text-blue-700 md:dark:text-blue-500"
+                        @if (request()->is("album"))
+                            class="block rounded px-3 py-2 text-white md:p-0 bg-blue-700 md:text-blue-700 md:dark:text-blue-500 md:bg-transparent"
                         @else
                             class="block rounded px-3 py-2 md:p-0 bg-slate-300 sm:bg-transparent text-slate-800 md:text-slate-700"
                         @endif
                         aria-current="@if (request()->is('album')) page @else '' @endif"
                     >
                         <i class="bi-house-fill md:hidden"></i>
-                        @lang('app.home')
+                        @lang("app.home")
                     </a>
                 </li>
             </ul>
