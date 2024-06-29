@@ -5,26 +5,33 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Foto extends Model
 {
+    use HasSlug;
+
     protected $table = "foto";
     protected $primaryKey = "FotoID";
     public $timestamps = false;
 
+    protected $guarded = ["FotoID"];
+
     /**
-     * The attributes that are mass assignable
-     *
-     * @var array<int, string>
+     * Get the options for generating the slug.
      */
-    protected $fillable = [
-        "JudulFoto",
-        "DeskripsiFoto",
-        "TanggalUnggah",
-        "LokasiFile",
-        "AlbumID",
-        "UserID",
-    ];
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom("JudulFoto")
+            ->saveSlugsTo("slug");
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return "slug";
+    }
 
     public function album(): BelongsTo
     {

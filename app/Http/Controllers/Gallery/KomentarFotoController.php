@@ -43,7 +43,6 @@ class KomentarFotoController extends Controller
         $comment = $request->validate(
             [
                 "fotoid" => "required",
-                "userid" => "required",
                 "isikomentar" => "required|string|min:1",
             ],
             $commentMessage
@@ -53,15 +52,15 @@ class KomentarFotoController extends Controller
 
         $newComment = KomentarFoto::create([
             "FotoID" => $comment["fotoid"],
-            "UserID" => $comment["userid"],
+            "UserID" => auth()->id(),
             "IsiKomentar" => $comment["isikomentar"],
             "TanggalKomentar" => $currentDate,
         ]);
 
-        $foto = $newComment->foto()->get()->first();
+        $foto = $newComment->photo()->first();
 
         return redirect()
-            ->route("foto.edit", $foto)
+            ->route("foto.show", $foto["slug"])
             ->with([
                 "success-comment" => "Berhasil menambah komentar !",
             ]);

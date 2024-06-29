@@ -7,17 +7,11 @@ use App\Models\Album;
 use App\Models\Foto;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class FotoController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware("auth");
-    }
-
     /**
      * Display a listing of the resource.
      */
@@ -44,78 +38,74 @@ class FotoController extends Controller
             "deskripsifoto" => "required|min:1",
         ]);
 
-        $imageMessage = [
-            "images.max" => "Ukuran maksimal file adalah 2MB !",
-        ];
-
         $request->validate(
             [
-                "image" => "required|image|mimes:jpg,jpeg,png|max:2048",
+                "images" => "required|array",
+                "images.*" => "required|mimes:jpg,jpeg,png|max:2048",
             ],
-            $imageMessage
+            [
+                "images.max" => "Ukuran maksimal file adalah 2MB !",
+            ]
         );
 
         $currentDate = date("Y-m-d");
-        $currentUserID = Auth::id();
-        $currentAlbumID = $request->input("albumid");
-        $album = Album::where("AlbumID", $currentAlbumID)->get()->first();
+        $currentUserID = auth()->id();
+        $slug = $request->slug;
+        $album = Album::firstWhere(["slug" => $slug]);
+        $images = $request->file("images");
 
-        $filename = preg_replace(
-            "/[^a-zA-Z0-9]/",
-            "",
-            strtolower($request->file("image")->getClientOriginalName())
-        );
-        $extension = $request->file("image")->getClientOriginalExtension();
-        $filenameWithoutExtension = str_replace($extension, "", $filename);
-        $filenameWithExtension = $filenameWithoutExtension . "." . $extension;
-        $filterAlbum = preg_replace(
-            "/[^a-zA-Z0-9]/",
-            "",
-            strtolower($album["NamaAlbum"])
-        );
-        $filepath = $request
-            ->file("image")
-            ->storeAs($filterAlbum, $filenameWithExtension, "public");
+        $i = 0;
+        foreach ($images as $image) {
+            $sanitizedImage =
+                strtotime($album["TanggalUnggah"]) .
+                random_int(0, 999999) .
+                "." .
+                strtolower($image->getClientOriginalExtension());
+            $filterAlbum = preg_replace(
+                "/[^a-zA-Z0-9]/",
+                "",
+                strtolower($album["NamaAlbum"])
+            );
+            $filepath = $image->storeAs(
+                $filterAlbum,
+                $sanitizedImage,
+                "public"
+            );
 
-        Foto::create([
-            "JudulFoto" => $foto["judulfoto"],
-            "DeskripsiFoto" => $foto["deskripsifoto"],
-            "TanggalUnggah" => $currentDate,
-            "LokasiFile" => $filepath,
-            "AlbumID" => $currentAlbumID,
-            "UserID" => $currentUserID,
-        ]);
+            Foto::create([
+                "JudulFoto" => $foto["judulfoto"][$i],
+                "DeskripsiFoto" => $foto["deskripsifoto"][$i],
+                "TanggalUnggah" => $currentDate,
+                "LokasiFile" => $filepath,
+                "AlbumID" => $album["AlbumID"],
+                "UserID" => $currentUserID,
+            ]);
+
+            $i++;
+        }
 
         return redirect()
-            ->route("gallery.edit", [
-                "gallery" => $album,
-            ])
-            ->with("success-insert", "Berhasil menambahkan foto baru !");
+            ->route("album.edit", $album["slug"])
+            ->with([
+                "upload-success" => __("app.images_upload_success"),
+            ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Foto $foto): View
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id): View
-    {
-        $foto = Foto::find($id);
         $likefoto = $foto->likefoto()->get();
         $komentarfoto = $foto->komentarfoto()->get();
         $commentcount = count($komentarfoto);
         $likes = count($foto->likefoto()->get());
-        $album = $foto->album()->get()->first();
-        $user = $foto->user()->get()->first();
+        $album = $foto->album()->first();
+        $user = $foto->user()->first();
 
-        $currentUserID = Auth::id();
-        $currentFotoOwnerID = $foto->user()->get()->first()["UserID"];
+        $currentUserID = auth()->id();
+        $currentFotoOwnerID = $foto->user()->first()->UserID;
+
         $editable = false;
         $liked = false;
 
@@ -133,7 +123,7 @@ class FotoController extends Controller
         }
 
         return view(
-            "foto.details",
+            "pages.photo-show",
             compact(
                 "foto",
                 "likefoto",
@@ -149,9 +139,16 @@ class FotoController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Foto $foto)
+    {
+    }
+
+    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Foto $foto)
     {
         //
     }
@@ -159,27 +156,30 @@ class FotoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Foto $foto): RedirectResponse
     {
-        $foto = Foto::find($id);
-        $album = $foto->album()->get()->first();
+        $album = $foto->album()->first();
         $splitStr = explode("/", $foto["LokasiFile"]);
         $path = join("\\", $splitStr);
 
-        if (!Storage::disk("public")->has($path)) {
+        if (!Storage::disk("public")->exists($path)) {
             return redirect()
                 ->route("gallery.edit", $album)
-                ->with(
-                    "warning-destroy",
-                    "Berkas tidak ditemukan. Berhasil menghapus foto !"
-                );
+                ->with([
+                    "photo_file_not_found_delete_success" => __(
+                        "app.photo_file_not_found_delete_success"
+                    ),
+                ]);
         }
 
         Storage::disk("public")->delete($path);
-        Foto::destroy($id);
+
+        $foto->delete();
 
         return redirect()
-            ->route("gallery.edit", $album)
-            ->with("success-destroy", "Berhasil menghapus foto !");
+            ->route("album.edit", $album["slug"])
+            ->with([
+                "photo_delete_success" => __("app.photo_delete_success"),
+            ]);
     }
 }

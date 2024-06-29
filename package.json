@@ -4,17 +4,24 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "prettier:view:check": "prettier --check --ignore-path .gitignore resources/",
-        "prettier:view:fix": "prettier --write --ignore-path .gitignore resources/",
+        "prettier:view:check": "prettier --check --ignore-path .gitignore resources/views",
+        "prettier:view:fix": "prettier --write --ignore-path .gitignore resources/views",
         "prettier:controller:check": "prettier --check --ignore-path .gitignore app/Http/Controllers --tab-width 4 --print-width 80",
         "prettier:controller:fix": "prettier --write --ignore-path .gitignore app/Http/Controllers --tab-width 4 --print-width 80",
         "prettier:model:check": "prettier --check --ignore-path .gitignore app/Models --tab-width 4 --print-width 80",
-        "prettier:model:fix": "prettier --write --ignore-path .gitignore app/Models --tab-width 4 --print-width 80"
+        "prettier:model:fix": "prettier --write --ignore-path .gitignore app/Models --tab-width 4 --print-width 80",
+        "prettier:css:check": "prettier --check --ignore-path .gitignore resources/css --tab-width 2 --print-width 80",
+        "prettier:css:fix": "prettier --write --ignore-path .gitignore resources/css --tab-width 2 --print-width 80",
+        "prettier:js:check": "prettier --check --ignore-path .gitignore resources/js --tab-width 2 --print-width 80",
+        "prettier:js:fix": "prettier --write --ignore-path .gitignore resources/js --tab-width 2 --print-width 80",
+        "prettier:react:check": "prettier --check --ignore-path .gitignore resources/js/Pages --tab-width 2 --print-width 80",
+        "prettier:react:fix": "prettier --write --ignore-path .gitignore resources/js/Pages --tab-width 2 --print-width 80"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.22.2",
         "autoprefixer": "^10.4.17",
         "axios": "^1.6.4",
+        "flowbite": "^2.3.0",
         "laravel-vite-plugin": "^1.0.0",
         "postcss": "^8.4.33",
         "prettier": "^3.2.5",
@@ -22,5 +29,25 @@
         "prettier-plugin-tailwindcss": "^0.5.11",
         "tailwindcss": "^3.4.1",
         "vite": "^5.0.0"
+    },
+    "dependencies": {
+        "@inertiajs/inertia-react": "^0.8.1",
+        "@inertiajs/react": "^1.1.0",
+        "@vitejs/plugin-react": "^4.3.0",
+        "alpinejs": "^3.14.0",
+        "bootstrap-icons": "^1.11.3",
+        "filepond": "^4.31.1",
+        "filepond-plugin-file-encode": "^2.1.14",
+        "filepond-plugin-file-metadata": "^1.0.8",
+        "filepond-plugin-file-poster": "^2.5.1",
+        "filepond-plugin-file-rename": "^1.1.8",
+        "filepond-plugin-file-validate-size": "^2.2.8",
+        "filepond-plugin-file-validate-type": "^1.2.9",
+        "filepond-plugin-image-edit": "^1.6.3",
+        "filepond-plugin-image-exif-orientation": "^1.0.11",
+        "filepond-plugin-image-preview": "^4.6.12",
+        "filepond-plugin-image-validate-size": "^1.2.7",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
     }
 }
