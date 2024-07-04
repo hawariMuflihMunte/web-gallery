@@ -43,11 +43,11 @@ class Photo extends Model
 
     public function comments(): HasMany
     {
-        return $this->hasMany(KomentarFoto::class, 'id', 'photo_id');
+        return $this->hasMany(Comment::class, 'id', 'photo_id');
     }
 
     public function likes(): HasMany
     {
-        return $this->hasMany(LikeFoto::class, 'id', 'photo_id');
+        return $this->hasMany(Like::class, 'id', 'photo_id');
     }
 }
