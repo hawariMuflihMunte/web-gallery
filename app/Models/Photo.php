@@ -31,33 +31,23 @@ class Photo extends Model
         return 'slug';
     }
 
-
-    /** TODO: [PHOTO] Implement photo model relationship
-     *
-     * - Update album model relatiionship key
-     * - Update user model relatiionship key
-     * - Update comment model relatiionship key
-     * - Update like model relatiionship key
-     * */
-
-
     public function album(): BelongsTo
     {
-        return $this->belongsTo(Album::class, 'AlbumID');
+        return $this->belongsTo(Album::class, 'id', 'album_id');
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'UserID');
+        return $this->belongsTo(User::class, 'id', 'user_id');
     }
 
     public function comments(): HasMany
     {
-        return $this->hasMany(KomentarFoto::class, 'FotoID');
+        return $this->hasMany(KomentarFoto::class, 'id', 'photo_id');
     }
 
     public function likes(): HasMany
     {
-        return $this->hasMany(LikeFoto::class, 'FotoID');
+        return $this->hasMany(LikeFoto::class, 'id', 'photo_id');
     }
 }
