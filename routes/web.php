@@ -2,15 +2,13 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Web\LogoutController;
 use App\Http\Controllers\Gallery\AlbumController;
 use App\Http\Controllers\Gallery\FotoController;
-use App\Http\Controllers\Gallery\GalleryController;
 use App\Http\Controllers\Gallery\LikeFotoController;
 use App\Http\Controllers\Gallery\KomentarFotoController;
 use App\Http\Controllers\Gallery\UserController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,17 +32,16 @@ Route::group([
     'middleware' => 'auth',
 ], function () {
     Route::get('/', function () {
-        return redirect()->route('gallery.index');
+        return redirect()->route('albums.index');
     });
-    Route::resource('/album', AlbumController::class);
-    Route::resource('/gallery', GalleryController::class);
-    // Route::resource('/photo', FotoController::class);
-    Route::resource('/foto', FotoController::class);
-    Route::resource('/likefoto', LikeFotoController::class);
-    Route::resource('/komentarfoto', KomentarFotoController::class);
-    Route::resource('/profile', ProfileController::class);
+
+    Route::resource('/albums', AlbumController::class);
+    Route::resource('/photos', FotoController::class);
+    Route::resource('/likes', LikeFotoController::class);
+    Route::resource('/comments', KomentarFotoController::class);
     Route::resource('/user', UserController::class);
-    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+    Route::get('/logout', LogoutController::class)->name('logout');
 });
 
 Route::resource('/post', PostController::class);
