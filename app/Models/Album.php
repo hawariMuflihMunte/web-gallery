@@ -13,11 +13,11 @@ class Album extends Model
 {
     use HasFactory, HasSlug;
 
-    protected $table = "album";
-    protected $primaryKey = "AlbumID";
-    public $timestamps = false;
+    protected $table = "albums";
+    protected $primaryKey = "id";
+    public $timestamps = true;
 
-    protected $guarded = ["AlbumID"];
+    protected $guarded = ["id"];
 
     /**
      * Get the options for generating the slug.
@@ -25,7 +25,7 @@ class Album extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom("NamaAlbum")
+            ->generateSlugsFrom("title")
             ->saveSlugsTo("slug");
     }
 
@@ -36,11 +36,11 @@ class Album extends Model
 
     public function photos(): HasMany
     {
-        return $this->hasMany(Foto::class, "AlbumID");
+        return $this->hasMany(Photo::class, 'album_id', 'id');
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, "UserID");
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
