@@ -30,20 +30,13 @@ class Like extends Model
         return 'slug';
     }
 
-
-    /** TODO: [PHOTO] Implement photo model relationship
-     *
-     * - Update photo model relatiionship key
-     * - Update user model relatiionship key
-     * */
-
     public function photo(): BelongsTo
     {
-        return $this->belongsTo(Foto::class, "FotoID");
+        return $this->belongsTo(Photo::class, 'id', 'photo_id');
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, "UserID");
+        return $this->belongsTo(User::class, "id", "user_id");
     }
 }
