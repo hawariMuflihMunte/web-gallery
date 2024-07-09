@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('albums', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->nullable(true)->default(null)->unique();
-            $table->string('title', 128);
-            $table->text('description');
+            $table->uuid('photo_id');
             $table->uuid('user_id');
             $table->timestamps();
 
+            $table->foreign('photo_id')->references('id')->on('photos')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('albums');
+        Schema::dropIfExists('likes');
     }
 };
