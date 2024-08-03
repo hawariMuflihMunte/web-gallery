@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -26,38 +25,18 @@ class LoginController extends Controller
             "password" => "required|string|min:8",
         ]);
 
-        $user = User::where("Username", $credentials["username"])->first();
-
-        if (is_null($user)) {
-            return redirect()
-                ->back()
-                ->with([
-                    "login-error" => __("app.login_error"),
-                ]);
-        }
-
-        $authPassword = password_verify(
-            $credentials["password"],
-            $user["Password"]
-        );
-
-        if ($authPassword) {
-            auth()->login($user);
-
+        if (auth()->attempt($credentials)) {
             return redirect()
                 ->route("album.index")
                 ->with([
-                    "login-success" => __("app.login_success_with_message", [
-                        "name",
-                        auth()->user()->Username,
-                    ]),
+                    "success" => __("app.login_success"),
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->with([
+                    "error" => __("app.login_error"),
                 ]);
         }
-
-        return redirect()
-            ->back()
-            ->with([
-                "login-error" => "{{ __('app.login_error') }}",
-            ]);
     }
 }
