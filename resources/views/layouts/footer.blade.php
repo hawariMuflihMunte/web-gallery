@@ -1,3 +1,5 @@
+@include('pages.extensions.session-alert')
+
 <footer class="m-4 rounded-lg bg-white shadow dark:bg-gray-900">
     <div class="mx-auto w-full max-w-screen-xl p-4 md:py-8">
         <div class="sm:flex sm:items-center sm:justify-between">

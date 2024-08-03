@@ -40,10 +40,10 @@
             >
                 <div class="px-4 py-3">
                     <span class="block text-sm text-gray-900 dark:text-white">
-                        {{ auth()->user()->NamaLengkap }}
+                        {{ auth()->user()->full_name }}
                     </span>
                     <span class="block truncate text-sm text-gray-500 dark:text-gray-400">
-                        {{ "@" }}{{ auth()->user()->Username }}
+                        {{ "@" }}{{ auth()->user()->username }}
                     </span>
                 </div>
                 <ul
