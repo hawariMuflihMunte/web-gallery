@@ -9,7 +9,6 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/css/bootstrap-icons.css',
                 'resources/js/app.jsx',
                 'resources/js/filepond.js',
                 'resources/js/flowbite.js',

@@ -13,60 +13,45 @@ class User extends Authenticatable
 {
     use HasFactory, HasRoles, HasSlug;
 
-    protected $table = "user";
-    protected $primaryKey = "UserID";
-    public $timestamps = false;
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
 
-    protected $guarded = ["UserID"];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = ["Password"];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+    protected $guarded = ['id'];
+    protected $hidden = ['password'];
     protected $casts = [
-        "Password" => "hashed",
+        'password' => 'hashed',
     ];
 
-    /**
-     * Get the options for generating the slug.
-     */
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom("Username")
-            ->saveSlugsTo("slug");
+            ->generateSlugsFrom('username')
+            ->saveSlugsTo('slug');
     }
 
     public function getRouteKeyName(): string
     {
-        return "slug";
+        return 'slug';
     }
 
     public function albums(): HasMany
     {
-        return $this->hasMany(Album::class, "UserID");
+        return $this->hasMany(Album::class, 'id', 'user_id');
     }
 
     public function photos(): HasMany
     {
-        return $this->hasMany(Foto::class, "UserID");
+        return $this->hasMany(Photo::class, 'id', 'user_id');
     }
 
     public function comments(): HasMany
     {
-        return $this->hasMany(KomentarFoto::class, "UserID");
+        return $this->hasMany(Comment::class, 'id', 'user_id');
     }
 
     public function likes(): HasMany
     {
-        return $this->hasMany(LikeFoto::class, "UserID");
+        return $this->hasMany(Like::class, 'id', 'user_id');
     }
 }

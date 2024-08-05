@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->nullable(true)->default(null)->unique();
-            $table->string('username', 255)->unique();
-            $table->string('full_name', 255);
-            $table->string('password', 255);
-            $table->string('email', 255)->unique();
-            $table->enum('gender', ['male', 'female', '-'])->default('male');
-            $table->text('address');
+            $table->uuid('photo_id');
+            $table->uuid('user_id');
             $table->timestamps();
+
+            $table->foreign('photo_id')->references('id')->on('photos')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('likes');
     }
 };

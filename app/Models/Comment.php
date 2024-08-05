@@ -5,27 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Album extends Model
+class Comment extends Model
 {
     use HasFactory, HasSlug;
 
-    protected $table = "albums";
+    protected $table = "comments";
     protected $primaryKey = "id";
     public $timestamps = true;
 
     protected $guarded = ["id"];
 
-    /**
-     * Get the options for generating the slug.
-     */
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom("title")
+            ->generateSlugsFrom("created_at")
             ->saveSlugsTo("slug");
     }
 
@@ -34,13 +30,13 @@ class Album extends Model
         return "slug";
     }
 
-    public function photos(): HasMany
+    public function photo(): BelongsTo
     {
-        return $this->hasMany(Photo::class, 'album_id', 'id');
+        return $this->belongsTo(Photo::class, 'id', 'photo_id');
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'id', 'user_id');
     }
 }

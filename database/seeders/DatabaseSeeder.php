@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             ModelHasRolesSeeder::class,
             UserSeeder::class,
-            AlbumSeeder::class,
-            FotoSeeder::class,
+            // AlbumSeeder::class,
+            // FotoSeeder::class,
             // PostSeeder::class,
         ]);
     }
